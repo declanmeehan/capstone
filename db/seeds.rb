@@ -6,7 +6,10 @@ Tag.create({"name" => "arpeggiator"})
 Synth.create({"name" => "acidic", "filename" => "blah.wav"})
 Synth.create({"name" => "keymaker", "filename" => "blahs.wav"})
 Synth.create({"name" => "paulverizer", "filename" => "bloo.wav"})
-
+Synth_tag.create({"synth_id" => "1", "tag_id" => "1"})
+Synth_tag.create({"synth_id" => "1", "tag_id" => "2"})
+Synth_tag.create({"synth_id" => "2", "tag_id" => "2"})
+Synth_tag.create({"synth_id" => "2", "tag_id" => "3"})
 
 
 
