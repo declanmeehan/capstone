@@ -1,0 +1,2 @@
+class SynthTag < ApplicationRecord
+end
