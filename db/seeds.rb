@@ -6,10 +6,13 @@ Tag.create({"name" => "arpeggiator"})
 Synth.create({"name" => "acidic", "filename" => "blah.wav"})
 Synth.create({"name" => "keymaker", "filename" => "blahs.wav"})
 Synth.create({"name" => "paulverizer", "filename" => "bloo.wav"})
-Synth_tag.create({"synth_id" => "1", "tag_id" => "1"})
-Synth_tag.create({"synth_id" => "1", "tag_id" => "2"})
-Synth_tag.create({"synth_id" => "2", "tag_id" => "2"})
-Synth_tag.create({"synth_id" => "2", "tag_id" => "3"})
+SynthTag.create({"synth_id" => 1, "tag_id" => 1})
+SynthTag.create({"synth_id" => 1, "tag_id" => 2})
+SynthTag.create({"synth_id" => 2, "tag_id" => 2})
+SynthTag.create({"synth_id" => 2, "tag_id" => 3})
+Like.create({"synth_id" => 1, "user_id" => 1})
+Like.create({"synth_id" => 1, "user_id" => 2})
+Like.create({"synth_id" => 2, "user_id" => 1})
 
 
 
