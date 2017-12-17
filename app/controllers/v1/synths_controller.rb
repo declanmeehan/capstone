@@ -8,8 +8,13 @@ class V1::SynthsController < ApplicationController
       name: params[:name],
       filename: params[:filename]
       )
-    synth.save
+    if synth.save
     render json: synth.as_json
+    else 
+      render json: {errors: order.errors.full_messages}, status: :bad_request
+    end
   end
 
+  
+  
 end
