@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-  belongs_to :synth
+  has_many :synth_tags
+  has_many :synths, through: :synth_tags
 end
