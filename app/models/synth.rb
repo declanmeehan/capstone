@@ -6,5 +6,10 @@ class Synth < ApplicationRecord
   has_many :synth_tags
   has_many :tags, through: :synth_tags
 
-
+  has_attached_file :audioFile
+    
+  validates_attachment :audioFile,
+    content_type: {
+      content_type: ["audioFile/mp4", "audioFile/wav"]
+    }
 end

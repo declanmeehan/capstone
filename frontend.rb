@@ -22,9 +22,9 @@ while true
 
   puts "Please enter a number:"
   puts "[1] show all synths"
-  puts "[1.1] search products by name" 
-  puts "[1.2] search products by price" 
-  puts "[2] create a product"
+  # puts "[1.1] search products by name" 
+  # puts "[1.2] search products by price" 
+  puts "[2] create a synth"
   puts "[2.1] create an order"
   puts "[3] show a product"
   puts "[4] update a product"
@@ -52,20 +52,17 @@ while true
   #   response = Unirest.get("http://localhost:3000/v1/products?search_price=#{response_price}")
   #   product = response.body
   #   pp product
-  # elsif answer_crud == "2"
-  #   print "enter product name: "
-  #   params["name"] = gets.chomp
-  #   print "enter product price: "
-  #   params["price"] = gets.chomp
-  #   # print "enter product image: "
-  #   # params["images"] = gets.chomp
-  #   print "enter supplier id"
-  #   params["supplier_id"] = gets.chomp
-  #   print "enter product Description: "
-  #   params["description"] = gets.chomp
-  #   response = Unirest.post("http://localhost:3000/v1/products", parameters: params)
-  #   order = response.body
-  #   pp order
+  elsif answer_crud == "2"
+    print "enter synth name: "
+    params["name"] = gets.chomp
+    print "enter product file name: "
+    params["filename"] = gets.chomp
+    # print "enter product image: "
+    # params["images"] = gets.chomp
+    params["description"] = gets.chomp
+    response = Unirest.post("http://localhost:3000/v1/synths", parameters: params)
+    synth = response.body
+    pp synth
   # elsif answer_crud == "2.1"
   #   params = {}
   #   puts "enter product_id"
@@ -114,27 +111,29 @@ while true
   #   params[:password_confirmation] = gets.chomp
   #   response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
   #   pp response.body
-  # elsif answer_crud == "login"
-  #   puts "Login to the app"
-  #   params = {}
-  #   print "Email: "
-  #   params[:email] = gets.chomp
-  #   print "Password: "
-  #   params[:password] = gets.chomp
-  #   response = Unirest.post("http://localhost:3000/v1/user_token", parameters: {auth: {email: params[:email], password: params[:password]}}
-  #     )
-  #   pp response.body
+  elsif answer_crud == "login"
+    puts "Login to the app"
+    params = {}
+    print "Email: "
+    params[:email] = gets.chomp
+    print "Password: "
+    params[:password] = gets.chomp
+    params[:user] = current_user
 
-  #   jwt = response.body["jwt"]
+    response = Unirest.post("http://localhost:3000/user_token", parameters: {auth: {email: params[:email], password: params[:password]}}
+      )
+    pp response.body
 
-  #   Unirest.default_header("Authorization", "Bearer #{jwt}")
-  # elsif answer_crud == "logout"
-  #   jwt = ""
-  #   puts "Logged out"
-  #   Unirest.clear_default_headers()
-  # elsif answer_crud == "q"
-  #   puts "Goodbye!"
-  #   break
+    jwt = response.body["jwt"]
+
+    Unirest.default_header("Authorization", "Bearer #{jwt}")
+  elsif answer_crud == "logout"
+    jwt = ""
+    puts "Logged out"
+    Unirest.clear_default_headers()
+  elsif answer_crud == "q"
+    puts "Goodbye!"
+    break
   else 
     puts "Please enter a valid command"
   end

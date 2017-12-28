@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+
   post 'user_token' => 'user_token#create'
+
+
 
   namespace :v1 do
   get "/synths" => "synths#index"

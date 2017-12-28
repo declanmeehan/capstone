@@ -1,8 +1,4 @@
 class V1::SynthsController < ApplicationController
-  
-
-
-
   def index 
     synth = Synth.all
     render json: synth.as_json
