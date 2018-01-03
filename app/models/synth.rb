@@ -1,5 +1,5 @@
 class Synth < ApplicationRecord
-
+  cattr_accessor :current_user
   belongs_to :user
   has_many :likes
   has_many :users, through: :likes
@@ -10,6 +10,8 @@ class Synth < ApplicationRecord
     
   validates_attachment :audioFile,
     content_type: {
-      content_type: ["audioFile/mp4", "audioFile/wav"]
+      content_type: [/.*/]
     }
+
+
 end

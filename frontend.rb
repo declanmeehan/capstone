@@ -21,6 +21,7 @@ while true
   params = {}
 
   puts "Please enter a number:"
+  puts "test"
   puts "[1] show all synths"
   # puts "[1.1] search products by name" 
   # puts "[1.2] search products by price" 
@@ -52,11 +53,22 @@ while true
   #   response = Unirest.get("http://localhost:3000/v1/products?search_price=#{response_price}")
   #   product = response.body
   #   pp product
+  elsif answer_crud == "test"
+    print current_user.id
   elsif answer_crud == "2"
     print "enter synth name: "
     params["name"] = gets.chomp
-    print "enter product file name: "
-    params["filename"] = gets.chomp
+    print "Enter the path to the file:"
+    input_file_path = gets.chomp
+    response = Unirest.post(
+    "http://localhost:3000/v1/posts", 
+    headers: { "Accept" => "application/json" }, 
+    parameters:{
+      title: input_title, 
+      body: input_body,
+      image: File.new(input_file_path, 'rb')
+    }
+  )
     # print "enter product image: "
     # params["images"] = gets.chomp
     params["description"] = gets.chomp
@@ -118,8 +130,6 @@ while true
     params[:email] = gets.chomp
     print "Password: "
     params[:password] = gets.chomp
-    params[:user] = current_user
-
     response = Unirest.post("http://localhost:3000/user_token", parameters: {auth: {email: params[:email], password: params[:password]}}
       )
     pp response.body
