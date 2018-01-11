@@ -13,5 +13,14 @@ class Synth < ApplicationRecord
       content_type: [/.*/]
     }
 
+  def as_json
+    {
+    # id: current_user.id,
+    name: name,
+     # url: audioFile_file_name.url(:original)
+     url: audioFile
 
+
+    }
+  end
 end

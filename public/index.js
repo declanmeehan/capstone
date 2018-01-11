@@ -6,7 +6,7 @@ var HomePage = {
   data: function() {
     return {
       synths: [],
-      newSynth: { name: "", tags: "", audioFile: "" },
+      newSynth: { name: "", tags: "", audioFile: "", url: "" },
       user: ""
     };
   },

@@ -1,9 +1,6 @@
 class V1::SynthsController < ApplicationController
-  before_action :set_current_user
+  # before_action :set_current_user
 
-  def set_current_user
-    Synth.current_user = current_user
-  end
 
   def index 
     synth = Synth.all
