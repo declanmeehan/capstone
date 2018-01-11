@@ -14,6 +14,8 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="index.js" defer></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.51/Tone.js"></script>
+  <script type="text/javascript" src="test.js"></script>
 
 
 	<!-- Favicons -->
@@ -845,8 +847,11 @@
 		<div>
     <h2>Create a new sound:</h2>
     <div>
+    	<button v-on:click="display()"> test noise </button>
+    	<button v-on:click="sampler()"> sampler </button>
       name: <input type="text" name="name" v-model="newSynth.name">
     </div>
+
     <div>
       audio file: <input type="file" v-on:change="createSynth($event)">
     </div>
@@ -855,6 +860,7 @@
       <audio controls>
        <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
     </div>
+
 	</template>
 
 	<template id="signup-page">

@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, Tone */
 // import VueAudio from "vue-audio";
 
 var HomePage = {
@@ -36,6 +36,44 @@ var HomePage = {
           event.target.value = "";
         }.bind(this)
       );
+    },
+    display: function() {
+      var synth;
+
+      var melodyList = ["C2", "D3", "E3", "F2", "G1", "A2", "B2", "C2"];
+      synth = new Tone.Synth().toMaster();
+
+      var melody = new Tone.Sequence(setPlay, melodyList).start();
+      melody.loop = 1;
+
+      Tone.Transport.bpm.value = 90;
+      Tone.Transport.start();
+
+      function setPlay(time, note) {
+        synth.triggerAttackRelease(note, "2n", time);
+      }
+    },
+    sampler: function() {
+      axios.get("/v1/synths").then(function(response) {
+        var sampleVar = new Tone.Sampler(
+          {
+            C3: response.data[0].url
+          },
+          function() {
+            sampleVar.triggerAttack("C3");
+          }
+        );
+        sampleVar.toMaster();
+        var delay = new Tone.FeedbackDelay("16n", 0.5).toMaster();
+        var melody = new Tone.Sequence(setPlay).start();
+        melody.loop = 1;
+        sample.toMaster();
+        Tone.Transport.bpm.value = 90;
+        Tone.Transport.start();
+        function setPlay(time, note) {
+          sample.triggerAttackRelease(note, "2n", time);
+        }
+      });
     }
   },
   computed: {}

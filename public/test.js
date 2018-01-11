@@ -1,19 +1,19 @@
-function display() {
-  var synth;
+// function display() {
+//   var synth;
 
-  var melodyList = ["C2", "D3", "E3", "F2", "G1", "A2", "B2", "C2"];
-  synth = new Tone.Synth().toMaster();
+//   var melodyList = ["C2", "D3", "E3", "F2", "G1", "A2", "B2", "C2"];
+//   synth = new Tone.Synth().toMaster();
 
-  var melody = new Tone.Sequence(setPlay, melodyList).start();
-  melody.loop = 3;
+//   var melody = new Tone.Sequence(setPlay, melodyList).start();
+//   melody.loop = 1;
 
-  Tone.Transport.bpm.value = 90;
-  Tone.Transport.start();
+//   Tone.Transport.bpm.value = 90;
+//   Tone.Transport.start();
 
-  function setPlay(time, note) {
-    synth.triggerAttackRelease(note, "2n", time);
-  }
-}
+//   function setPlay(time, note) {
+//     synth.triggerAttackRelease(note, "2n", time);
+//   }
+// }
 
 function changeSound(event) {
   axios.get("/v1/synths").then(function(response) {
