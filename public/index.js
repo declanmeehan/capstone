@@ -2,7 +2,11 @@
 // import VueAudio from "vue-audio";
 
 var HomePage = {
-  template: "#home-page",
+  template: "#home-page"
+};
+
+var ProfilePage = {
+  template: "#profile-page",
   data: function() {
     return {
       synths: [],
@@ -63,11 +67,10 @@ var HomePage = {
             sampleVar.triggerAttack("C3");
           }
         );
-        sampleVar.toMaster();
         var delay = new Tone.FeedbackDelay("16n", 0.5).toMaster();
+        sampleVar.connect(delay);
         var melody = new Tone.Sequence(setPlay).start();
         melody.loop = 1;
-        sample.toMaster();
         Tone.Transport.bpm.value = 90;
         Tone.Transport.start();
         function setPlay(time, note) {
@@ -158,7 +161,8 @@ var router = new VueRouter({
     { path: "/", component: HomePage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
-    { path: "/logout", component: LogoutPage }
+    { path: "/logout", component: LogoutPage },
+    { path: "/profile", component: ProfilePage }
   ]
 });
 
