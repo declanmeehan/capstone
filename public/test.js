@@ -14,16 +14,23 @@
 //     synth.triggerAttackRelease(note, "2n", time);
 //   }
 // }
+// function changeSound(event) {
+//   axios.get("/v1/synths").then(function(response) {
+//     var synthOne = response.data[0].url;
+//     var player = new Tone.Player({
+//       url: synthOne,
 
-function changeSound(event) {
-  axios.get("/v1/synths").then(function(response) {
-    var synthOne = response.data[0].url;
-    var player = new Tone.Player({
-      url: synthOne,
+//       autostart: true
+//     }).toMaster();
 
-      autostart: true
-    }).toMaster();
-
-    player.start();
+//     player.start();
+//   });
+// }
+$(document).ready(function() {
+  $(function() {
+    $(".dial").knob({
+      height: 50,
+      width: 50
+    });
   });
-}
+});

@@ -782,6 +782,9 @@
 	<script src="js/jquery.jplayer.min.js"></script>
 	<script src="js/jplayer.playlist.min.js"></script>
 	<script src="js/main.js"></script>
+	        		<!-- jquery knob -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+	<script type="text/javascript" src="test.js"></script>
 </body>
 </html>
 
@@ -849,21 +852,11 @@
 <template id="profile-page">
 		<div>
     <h2>Create a new sound:</h2>
-    <div>
-    		<!-- jquery knob -->
-    		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="https://cdn.rawgit.com/aterrien/jQuery-Knob/755309e9/dist/jquery.knob.min.js"></script>
     	<button v-on:click="display()"> test noise </button>
-    	<button v-on:click="sampler()"> sampler </button>
+    <div>
 
-    	<input type="text" value="75" class="dial">
-
-<script>
-    $(function() {
-        $(".dial").knob();
-    });
-</script>
-
+    	<button id="gainKnob" class="btn btn-primary"v-on:click="sampler()"> sampler </button>
+  	<label> delay <input type="text" value="100" class="dial"> </label>
       name: <input type="text" name="name" v-model="newSynth.name">
     </div>
 
@@ -875,33 +868,32 @@
       <audio controls>
        <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
     </div>
-
 	</template>
 
-	<template id="signup-page">
-  <div class="container">
-    <h1>Signup</h1>
-    <ul>
-      <li class="text-danger" v-for="error in errors">{{ error }}</li>
-    </ul>
-    <div class="form-group">
-      <label>Name:</label> 
-      <input type="text" class="form-control" v-model="name">
-    </div>
-    <div class="form-group">
-      <label>Email:</label>
-      <input type="email" class="form-control" v-model="email">
-    </div>
-    <div class="form-group">
-      <label>Password:</label>
-      <input type="password" class="form-control" v-model="password">
-    </div>
-    <div class="form-group">
-      <label>Password confirmation:</label>
-      <input type="password" class="form-control" v-model="passwordConfirmation">
-    </div>
-    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
-  </div>
+<template id="signup-page">
+	  <div class="container">
+	    <h1>Signup</h1>
+	    <ul>
+	      <li class="text-danger" v-for="error in errors">{{ error }}</li>
+	    </ul>
+	    <div class="form-group">
+	      <label>Name:</label> 
+	      <input type="text" class="form-control" v-model="name">
+	    </div>
+	    <div class="form-group">
+	      <label>Email:</label>
+	      <input type="email" class="form-control" v-model="email">
+	    </div>
+	    <div class="form-group">
+	      <label>Password:</label>
+	      <input type="password" class="form-control" v-model="password">
+	    </div>
+	    <div class="form-group">
+	      <label>Password confirmation:</label>
+	      <input type="password" class="form-control" v-model="passwordConfirmation">
+	    </div>
+	    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+	  </div>
 </template>
 
 <template id="login-page">

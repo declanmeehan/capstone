@@ -67,14 +67,16 @@ var ProfilePage = {
             sampleVar.triggerAttack("C3");
           }
         );
-        var delay = new Tone.FeedbackDelay("16n", 0.5).toMaster();
+        var gainValue = document.getElementById("gainKnob").value;
+        console.log(gainValue);
+        var delay = new Tone.FeedbackDelay("16n", 0.9).toMaster();
         sampleVar.connect(delay);
         var melody = new Tone.Sequence(setPlay).start();
         melody.loop = 1;
         Tone.Transport.bpm.value = 90;
         Tone.Transport.start();
         function setPlay(time, note) {
-          sample.triggerAttackRelease(note, "2n", time);
+          sampleVar.triggerAttackRelease(note, "2n", time);
         }
       });
     }
