@@ -1,5 +1,21 @@
-/* global Vue, VueRouter, axios, Tone */
+/* global Vue, $, VueRouter, axios, Tone */
 // import VueAudio from "vue-audio";
+
+/* jquery */
+
+var declanGainKnobVariable = 0;
+
+$(document).ready(function() {
+  $(function() {
+    $(".dial").knob({
+      change: function(value) {
+        console.log(value);
+      }
+    });
+  });
+});
+
+/* ^^^^ jquery */
 
 var HomePage = {
   template: "#home-page"
@@ -67,9 +83,9 @@ var ProfilePage = {
             sampleVar.triggerAttack("C3");
           }
         );
-        var gainValue = document.getElementById("gainKnob").value;
-        console.log(gainValue);
-        var delay = new Tone.FeedbackDelay("16n", 0.9).toMaster();
+        var gainValue = document.getElementById("gainKnob").change;
+        console.log(declanGainKnobVariable);
+        var delay = new Tone.FeedbackDelay("16n", 0.5).toMaster();
         sampleVar.connect(delay);
         var melody = new Tone.Sequence(setPlay).start();
         melody.loop = 1;

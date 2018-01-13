@@ -26,11 +26,21 @@
 //     player.start();
 //   });
 // }
+
+var declanGainKnobVariable = 0;
+
 $(document).ready(function() {
   $(function() {
-    $(".dial").knob({
-      height: 50,
-      width: 50
-    });
+    $(".dial").knob(
+      {
+        change: function(value) {
+          declanGainKnobVariable = value;
+        }
+      },
+      {
+        height: 50,
+        width: 50
+      }
+    );
   });
 });
