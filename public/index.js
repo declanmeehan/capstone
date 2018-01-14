@@ -31,16 +31,16 @@ var ProfilePage = {
     };
   },
   mounted: function() {
-    axios.get("/v1/synths").then(
+    axios.get("/v1/synths/private").then(
       function(response) {
         this.synths = response.data;
       }.bind(this)
     );
-    axios.get("/v1/users").then(
-      function(response) {
-        this.user = response.data;
-      }.bind(this)
-    );
+    // axios.get("/v1/users").then(
+    //   function(response) {
+    //     this.user = response.data;
+    //   }.bind(this)
+    // );
   },
   methods: {
     createSynth: function(event) {
@@ -51,7 +51,6 @@ var ProfilePage = {
       }
       axios.post("/v1/synths", formData).then(
         function(response) {
-          console.log(response);
           this.name = "";
           event.target.value = "";
         }.bind(this)
@@ -153,7 +152,7 @@ var LoginPage = {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          router.push("/");
+          router.push("/profile");
         })
         .catch(
           function(error) {

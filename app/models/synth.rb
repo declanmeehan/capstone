@@ -16,12 +16,9 @@ class Synth < ApplicationRecord
   def as_json
     {
       id: id,
-     user_id: user_id,
-    name: name,
-     # url: audioFile_file_name.url(:original)
-     url: audioFile
-
-
+      name: name,
+      user_id: user_id,
+      url: audioFile
     }
   end
 end

@@ -18,21 +18,33 @@ class V1::SynthsController < ApplicationController
       render json: {errors: synth.errors.full_messages}, status: :bad_request
     end
   end
-  def show
-    synth_id = params["id"].to_i
-    synth = Synth.find_by(id: synth_id)
+
+  def userProfilePrivate
+    synth = Synth.where(user_id: current_user)
     render json: synth.as_json
   end
-  def update
-    synth_id = params[id].to_i
-    synth = Synth.find_by(id: synth_id)
-    synth.name = params["name"]
-    if product.save
-      render json: synth.as_json
-    else 
-      render json: {errors: synth.erors.full_messages}, status: :bad_request
-    end
+
+  def userProfilePublic
+    user_id = params["user_id"].to_i
+    synth = Synth.where(user_id: user_id)
+    render json: synth.as_json
   end
+
+  def show
+    synth_id = params["id"].to_i
+    synth = Synth.where(id: synth_id)
+    render json: synth.as_json
+  end
+  # def update
+  #   synth_id = params["id"].to_i
+  #   synth = Synth.find_by(id: current_user)
+  #   synth.name = params["name"]
+  #   if product.save
+  #     render json: synth.as_json
+  #   else 
+  #     render json: {errors: synth.erors.full_messages}, status: :bad_request
+  #   end
+  # end
 
 
 

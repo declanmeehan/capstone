@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     
   get "/synths" => "synths#index"
   post "/synths" => "synths#create"
+  get "/synths/user/:user_id" => "synths#userProfilePublic"
+  get "/synths/private" => "synths#userProfilePrivate"
+  get "/synths/:id" => "synths#show"
 
   end
   namespace :v1 do 
@@ -18,6 +21,7 @@ Rails.application.routes.draw do
   namespace :v1  do
    get "/users" => "users#index"
    post "/users" => "users#create"
+   get "/users/:id" => "users#show"
   end
 
 
