@@ -29,18 +29,18 @@
 
 var declanGainKnobVariable = 0;
 
-$(document).ready(function() {
-  $(function() {
-    $(".dial").knob(
-      {
-        change: function(value) {
-          declanGainKnobVariable = value;
-        }
-      },
-      {
-        height: 50,
-        width: 50
-      }
-    );
-  });
-});
+// $(document).ready(function() {
+//   $(function() {
+//     $(".dial").knob(
+//       {
+//         change: function(value) {
+//           declanGainKnobVariable = value;
+//         }
+//       },
+//       {
+//         height: 50,
+//         width: 50
+//       }
+//     );
+//   });
+// });

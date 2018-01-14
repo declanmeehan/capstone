@@ -2,14 +2,43 @@
 // import VueAudio from "vue-audio";
 
 /* jquery */
+var oscillator = new Tone.Oscillator();
 
-var declanGainKnobVariable = 0;
-
+var declanDelayKnob = 0;
 $(document).ready(function() {
   $(function() {
-    $(".dial").knob({
+    $(".delay-dial").knob({
+      height: 50,
+      width: 50,
       change: function(value) {
-        console.log(value);
+        declanDelayKnob = value / 100;
+        console.log("delay" + declanDelayKnob);
+      }
+    });
+  });
+});
+var declanFilterKnob = 0;
+$(document).ready(function() {
+  $(function() {
+    $(".filter-dial").knob({
+      height: 50,
+      width: 50,
+      change: function(value) {
+        declanFilterKnob = value * 10;
+        console.log("filter is" + declanFilterKnob);
+      }
+    });
+  });
+});
+var declanPitchKnob = 0;
+$(document).ready(function() {
+  $(function() {
+    $(".pitch-dial").knob({
+      height: 50,
+      width: 50,
+      change: function(value) {
+        declanPitchKnob = value / 10;
+        console.log("pitch is" + declanPitchKnob);
       }
     });
   });
@@ -36,11 +65,6 @@ var ProfilePage = {
         this.synths = response.data;
       }.bind(this)
     );
-    // axios.get("/v1/users").then(
-    //   function(response) {
-    //     this.user = response.data;
-    //   }.bind(this)
-    // );
   },
   methods: {
     createSynth: function(event) {
@@ -82,10 +106,18 @@ var ProfilePage = {
             sampleVar.triggerAttack("C3");
           }
         );
-        var gainValue = document.getElementById("gainKnob").change;
-        console.log(declanGainKnobVariable);
-        var delay = new Tone.FeedbackDelay("16n", 0.5).toMaster();
-        sampleVar.connect(delay);
+        var delay = new Tone.FeedbackDelay("16n", declanDelayKnob).toMaster();
+        var filter = new Tone.Filter(declanFilterKnob, "bandpass").toMaster();
+        var pitch = new Tone.PitchShift(declanPitchKnob).toMaster();
+
+        //connections
+
+        sampleVar.connect(filter);
+        filter.connect(delay);
+        sampleVar.connect(pitch);
+
+        // end connections
+
         var melody = new Tone.Sequence(setPlay).start();
         melody.loop = 1;
         Tone.Transport.bpm.value = 90;
@@ -96,7 +128,15 @@ var ProfilePage = {
       });
     }
   },
-  computed: {}
+  computed: {
+    mounted: function() {
+      axios.get("/v1/synths/:id").then(
+        function(response) {
+          this.synths = response.data;
+        }.bind(this)
+      );
+    }
+  }
 };
 
 var SignupPage = {
@@ -173,13 +213,21 @@ var LogoutPage = {
   }
 };
 
+var AlbumPage = {
+  template: "#album-page"
+};
+
+var EditSynthPage = {};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/profile", component: ProfilePage }
+    { path: "/profile", component: ProfilePage },
+    { path: "/album", component: AlbumPage },
+    { path: "/edit/:id", component: EditSynthPage }
   ]
 });
 

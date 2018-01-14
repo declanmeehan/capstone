@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Blast – Music Template for Record Label & Internet Radio</title>
+	<title>Sound Spotter</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta charset="utf-8">
@@ -44,7 +44,7 @@
 
 <body>
 	<div id="app">
- 	<router-view></router-view>
+		<router-view></router-view>
 	<!-- header -->
 	<header class="header">
 		<div class="row">
@@ -57,7 +57,7 @@
 				<!-- end mobile button -->
 
 				<!-- logo -->
-				<a class="header__logo" href="index.html">
+				<a class="header__logo" href="/#/">
 					<img src="img/logo.png" alt="">
 				</a>
 				<!-- end logo -->
@@ -78,7 +78,7 @@
 
 					<li class="header__actions-item">
 						<button class="header__user-btn" data-toggle="dropdown" aria-expanded="false">
-							<img src="img/user.png" alt="">
+							<img src="pictures/profile1-icon.jpg" alt="">
 						</button>
 
 						<ul class="header__user-menu">
@@ -99,7 +99,6 @@
 		</div>
 	</header>
 	<!-- end header -->
-
 	<!-- search -->
 	<div class="search">
 		<button class="search__btn">
@@ -116,7 +115,7 @@
 		<div class="sidebar__content scrollbar-sidebar">
 			<ul class="sidebar__nav clearfix">
 				<li>
-					<a class="sidebar__link active" href="index.html">Home</a>
+					<a class="sidebar__link active" href="/#/">Home</a>
 				</li>
 				<li>
 					<a class="sidebar__link" href="artists.html">Artists</a>
@@ -197,14 +196,188 @@
 		</div>
 	</aside>
 	<!-- end sidebar -->
-</div>
-
 	</div>
 	<!-- content -->
-		<div>
-			<main class="content-wrap clearfix">
-				<div class="content">
+					<!-- footer -->
+					<div class="footer">
+						<div class="row">
 
+							<div class="col-xs-12 col-sm-6">
+								<div class="footer__logo">
+									<a href="/#/"><img src="img/logo--white.png" alt=""></a>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-6">
+								<ul class="footer__social">
+									<li>
+										<a href="#">
+											<i class="fa fa-soundcloud"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-spotify"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook-official"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-instagram"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- end footer -->
+				</div>
+			</main>
+		</div>	
+
+	<!-- end content -->
+	
+	<!-- player -->
+	<div id="jp_container_1" class="player" role="application" aria-label="media player">
+
+		<div class="player__progress-wrap">
+			<div class="player__progress jp-progress">
+				<div class="player__seek-bar jp-seek-bar">
+					<div class="player__play-bar jp-play-bar"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-6 col-sm-4 col-md-5">
+				<div class="player__cover">
+					<div id="jquery_jplayer_1"></div>
+				</div>
+
+				<div id="current-track" class="player__track-title">Cro Magnon Man</div>
+			</div>
+
+			<div class="col-xs-4 col-sm-4 col-md-2">
+				<ul class="player__buttons jp-controls">
+					<li>
+						<button class="player__prev-btn jp-previous">
+							<span class="glyphicon glyphicon-step-backward"></span>
+						</button>
+					</li>
+					<li>
+						<button class="player__play-btn jp-play">
+							<span class="glyphicon glyphicon-play"></span>
+							<span class="glyphicon glyphicon-pause"></span>
+						</button>
+					</li>
+					<li>
+						<button class="player__next-btn jp-next">
+							<span class="glyphicon glyphicon-step-forward"></span>
+						</button>
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-xs-2 col-sm-4 col-md-5">
+				<div class="player__playlist-wrap jp-playlist">
+					<button class="player__playlist-btn" data-toggle="dropdown" aria-expanded="false">
+						<span class="lnr lnr-indent-increase"></span>
+					</button>
+
+					<ul class="player__playlist" data-toggle="dropdown-menu--click"></ul>
+				</div>
+
+				<div class="player__volume jp-volume-bar">
+					<div class="player__volume-value jp-volume-bar-value"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end player -->
+
+	<!-- JS -->
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBknhSY15CjOP_Ld9ThcX80ibC29uhP2jY"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/jquery.mCustomScrollbar.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/jquery.jplayer.min.js"></script>
+	<script src="js/jplayer.playlist.min.js"></script>
+	<script src="js/main.js"></script>
+	        		<!-- jquery knob -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+	<script type="text/javascript" src="test.js"></script>
+</div>
+</body>
+</html>
+
+<template id="home-page">
+	<div>
+		<main class="content-wrap clearfix">
+			<div class="content">
+						<!-- home slider -->
+					<section class="section section--first">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="home-carousel-wrap">
+									<div class="home-carousel owl-carousel">
+										<!-- slide -->
+										<div class="item home-carousel__item" data-bg="/pictures/cover1.jpg">
+											<div class="home-carousel__text">
+												<div class="home-carousel__title home-carousel__title--right">
+													<h1>Find any kind of sound with<br><span>Sample Spotter</span></h1>
+													<a href="/#/profile"  class="default-btn default-btn--red">Get Started</a>
+												</div>
+											</div>
+										</div>
+										<!-- end slide -->
+
+										<!-- slide -->
+										<div class="item home-carousel__item" data-bg="/pictures/cover6.jpg">
+											<div class="home-carousel__text">
+												<div class="home-carousel__title home-carousel__title--white">
+													<h1>Upload Your Own Audio Files</h1>
+													<h2>Add effects or even make your own sampler!</h2>
+													<a href="#" class="default-btn">Check it out!</a>
+												</div>
+											</div>
+										</div>
+										<!-- end slide -->
+
+										<!-- slide -->
+										<div class="item home-carousel__item" data-bg="/pictures/cover7.png">
+											<div class="home-carousel__text">
+												<div class="home-carousel__title home-carousel__title--white">
+													<h1>Download Any Sound and add it to Your Personal Project</h1>
+													<a href="#" class="default-btn default-btn--white">Explore</a>
+												</div>
+											</div>
+										</div>
+										<!-- end slide -->
+									</div>
+
+									<button class="home-carousel-nav__prev">
+										<span class="lnr lnr-arrow-left"></span>
+									</button>
+									<button class="home-carousel-nav__next">
+										<span class="lnr lnr-arrow-right"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- end home slider -->
 
 					<!-- new releases -->
 					<section class="section">
@@ -221,11 +394,11 @@
 							<!-- release -->
 							<div class="col-xs-6 col-sm-3">
 								<article class="release-post">
-									<figure class="release-post__cover"><a href="release.html"><img src="img/covers/cover.jpg" alt=""></a></figure>
+									<figure class="release-post__cover"><a href="/#/album"><img src="./pictures/album1.jpg" alt=""></a></figure>
 
 									<header class="release-post__header">
-										<h2 class="release-post__title"><a href="release.html">Forbidden Forest</a></h2>
-										<a href="artist.html" class="release-post__autor">Chris S.</a>
+										<h2 class="release-post__title"><a href="release.html">Traffic</a></h2>
+										<a href="artist.html" class="release-post__autor">Johnny Smith</a>
 									</header>
 								</article>
 							</div>
@@ -234,11 +407,11 @@
 							<!-- release -->
 							<div class="col-xs-6 col-sm-3">
 								<article class="release-post">
-									<figure class="release-post__cover"><a href="release.html"><img src="img/covers/cover.jpg" alt=""></a></figure>
+									<figure class="release-post__cover"><a href="/#/album"><img src="./pictures/album2.jpg" alt=""></a></figure>
 
 									<header class="release-post__header">
-										<h2 class="release-post__title"><a href="release.html">EMOJI</a></h2>
-										<a href="artist.html" class="release-post__autor">John Doe</a>
+										<h2 class="release-post__title"><a href="release.html">Video Game 8-bit</a></h2>
+										<a href="artist.html" class="release-post__autor">Jane Doe</a>
 									</header>
 								</article>
 							</div>
@@ -247,10 +420,10 @@
 							<!-- release -->
 							<div class="col-xs-6 col-sm-3">
 								<article class="release-post">
-									<figure class="release-post__cover"><a href="release.html"><img src="img/covers/cover.jpg" alt=""></a></figure>
+									<figure class="release-post__cover"><a href="/#/album"><img src="./pictures/album3.jpg" alt=""></a></figure>
 
 									<header class="release-post__header">
-										<h2 class="release-post__title"><a href="release.html">Presidential</a></h2>
+										<h2 class="release-post__title"><a href="release.html">Filtered Drums</a></h2>
 										<a href="artist.html" class="release-post__autor">Taylor</a>
 									</header>
 								</article>
@@ -260,10 +433,10 @@
 							<!-- release -->
 							<div class="col-xs-6 col-sm-3">
 								<article class="release-post">
-									<figure class="release-post__cover"><a href="release.html"><img src="img/covers/cover.jpg" alt=""></a></figure>
+									<figure class="release-post__cover"><a href="/#/album"><img src="./pictures/album4.jpg" alt=""></a></figure>
 
 									<header class="release-post__header">
-										<h2 class="release-post__title"><a href="release.html">Youth 98</a></h2>
+										<h2 class="release-post__title"><a href="release.html">Outdoors</a></h2>
 										<a href="artist.html" class="release-post__autor">Jack J.</a>
 									</header>
 								</article>
@@ -665,185 +838,6 @@
 					</section>
 					<!-- end new items -->
 
-					<!-- footer -->
-					<div class="footer">
-						<div class="row">
-
-							<div class="col-xs-12 col-sm-6">
-								<div class="footer__logo">
-									<a href="index.html"><img src="img/logo--white.png" alt=""></a>
-								</div>
-							</div>
-
-							<div class="col-xs-12 col-sm-6">
-								<ul class="footer__social">
-									<li>
-										<a href="#">
-											<i class="fa fa-soundcloud"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-spotify"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-facebook-official"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-instagram"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- end footer -->
-				</div>
-			</main>
-		</div>	
-
-	<!-- end content -->
-	
-	<!-- player -->
-	<div id="jp_container_1" class="player" role="application" aria-label="media player">
-
-		<div class="player__progress-wrap">
-			<div class="player__progress jp-progress">
-				<div class="player__seek-bar jp-seek-bar">
-					<div class="player__play-bar jp-play-bar"></div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-xs-6 col-sm-4 col-md-5">
-				<div class="player__cover">
-					<div id="jquery_jplayer_1"></div>
-				</div>
-
-				<div id="current-track" class="player__track-title">Cro Magnon Man</div>
-			</div>
-
-			<div class="col-xs-4 col-sm-4 col-md-2">
-				<ul class="player__buttons jp-controls">
-					<li>
-						<button class="player__prev-btn jp-previous">
-							<span class="glyphicon glyphicon-step-backward"></span>
-						</button>
-					</li>
-					<li>
-						<button class="player__play-btn jp-play">
-							<span class="glyphicon glyphicon-play"></span>
-							<span class="glyphicon glyphicon-pause"></span>
-						</button>
-					</li>
-					<li>
-						<button class="player__next-btn jp-next">
-							<span class="glyphicon glyphicon-step-forward"></span>
-						</button>
-					</li>
-				</ul>
-			</div>
-
-			<div class="col-xs-2 col-sm-4 col-md-5">
-				<div class="player__playlist-wrap jp-playlist">
-					<button class="player__playlist-btn" data-toggle="dropdown" aria-expanded="false">
-						<span class="lnr lnr-indent-increase"></span>
-					</button>
-
-					<ul class="player__playlist" data-toggle="dropdown-menu--click"></ul>
-				</div>
-
-				<div class="player__volume jp-volume-bar">
-					<div class="player__volume-value jp-volume-bar-value"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end player -->
-
-	<!-- JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBknhSY15CjOP_Ld9ThcX80ibC29uhP2jY"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.mousewheel.min.js"></script>
-	<script src="js/jquery.mCustomScrollbar.min.js"></script>
-	<script src="js/masonry.pkgd.min.js"></script>
-	<script src="js/jquery.jplayer.min.js"></script>
-	<script src="js/jplayer.playlist.min.js"></script>
-	<script src="js/main.js"></script>
-	        		<!-- jquery knob -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
-	<script type="text/javascript" src="test.js"></script>
-</body>
-</html>
-
-<template id="home-page">
-	<div>
-		<main class="content-wrap clearfix">
-			<div class="content">
-						<!-- home slider -->
-					<section class="section section--first">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="home-carousel-wrap">
-									<div class="home-carousel owl-carousel">
-										<!-- slide -->
-										<div class="item home-carousel__item" data-bg="/pictures/cover1.jpg">
-											<div class="home-carousel__text">
-												<div class="home-carousel__title home-carousel__title--right">
-													<h1>Find any kind of sound with<br><span>Sample Spotter</span></h1>
-													<a href="/#/profile"  class="default-btn default-btn--red">Get Started</a>
-												</div>
-											</div>
-										</div>
-										<!-- end slide -->
-
-										<!-- slide -->
-										<div class="item home-carousel__item" data-bg="/pictures/cover6.jpg">
-											<div class="home-carousel__text">
-												<div class="home-carousel__title home-carousel__title--white">
-													<h1>Upload Your Own Audio Files</h1>
-													<h2>Add effects or even make your own sampler!</h2>
-													<a href="#" class="default-btn">Check it out!</a>
-												</div>
-											</div>
-										</div>
-										<!-- end slide -->
-
-										<!-- slide -->
-										<div class="item home-carousel__item" data-bg="/pictures/cover7.png">
-											<div class="home-carousel__text">
-												<div class="home-carousel__title home-carousel__title--white">
-													<h1>Download Any Sound and add it to Your Personal Project</h1>
-													<a href="#" class="default-btn default-btn--white">Explore</a>
-												</div>
-											</div>
-										</div>
-										<!-- end slide -->
-									</div>
-
-									<button class="home-carousel-nav__prev">
-										<span class="lnr lnr-arrow-left"></span>
-									</button>
-									<button class="home-carousel-nav__next">
-										<span class="lnr lnr-arrow-right"></span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</section>
-					<!-- end home slider -->
 			</div>
 		</main>
 	</div>
@@ -855,8 +849,10 @@
     	<button v-on:click="display()"> test noise </button>
     <div>
 
-    	<button id="gainKnob" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
-  	<label> delay <input type="number" value="50" class="dial"> </label>
+    	<button id="sampler" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
+  	<label> delay <input type="text" value="50" class="delay-dial"> </label>
+  	<label> filter <input type="text" value="50" class="filter-dial"> </label>
+  		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
       name: <input type="text" name="name" v-model="newSynth.name">
     </div>
 
@@ -867,6 +863,7 @@
       <p> {{ synth.name }} </p>
       <audio controls>
        <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
+       		 <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
     </div>
 	</template>
 
@@ -912,4 +909,230 @@
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>
+</template>
+
+<template id="album-page">
+	<div class="container">
+			<!-- content -->
+		<main class="content-wrap clearfix">
+			<div class="content">
+
+				<section class="section section--first">
+					<div class="row">
+						<!-- release -->
+						<div class="col-xs-12 col-sm-4 col-md-3">
+							<!-- release cover -->
+							<div class="release__cover">
+								<img src="img/covers/cover.jpg" alt="">
+							</div>
+							<!-- end release cover -->
+
+							<!-- release social -->
+							<ul class="release__social clearfix">
+								<li>
+									<a href="#">
+										<i class="fa fa-soundcloud"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-spotify"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-facebook-official"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-instagram"></i>
+									</a>
+								</li>
+							</ul>
+							<!-- end release social -->
+						</div>
+
+						<div class="col-xs-12 col-sm-8 col-md-9">
+							<!-- release content -->
+							<div class="release__content">
+
+								<h1 class="release__title">Album Title</h1>
+
+								<span class="release__producer">Produced by John Doe</span>
+
+								<p class="release__description">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+
+								<ul class="release__list clearfix">
+									<li>Released by: Reliser</li>
+									<li>Release date: 21 March 2016</li>
+								</ul>
+
+								<ul class="release__tags clearfix">
+									<li>Genres:</li>
+									<li>
+										<a href="#">rock</a>
+									</li>
+									<li>
+										<a href="#">pop-rock</a>
+									</li>
+									<li>
+										<a href="#">alternative</a>
+									</li>
+								</ul>
+
+								<button type="button" class="default-btn">buy album</button>
+							</div>
+							<!-- end release content -->
+						</div>
+						<!-- end release -->
+
+						<!-- tabs -->
+						<div class="col-xs-12">
+							<div class="tabs">
+
+								<!-- tabs nav -->
+								<ul class="tabs__nav clearfix" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">tracklist</a>
+									</li>
+									<li role="presentation">
+										<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">reviews</a>
+									</li>
+								</ul>
+								<!-- end tabs nav -->
+
+								<div class="tab-content">
+									<!-- tab1 -->
+									<div role="tabpanel" class="tab-pane fade in active" id="tab1">
+
+										<span class="tracklist__info">
+											8 songs • duration: 58:43
+										</span>
+										
+										<ul class="tracklist">
+											<li class="tracklist__item">
+												<span class="number">1</span>
+												<span class="title">Intro</span>
+												<span class="time">3:21</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">2</span>
+												<span class="title">Today</span>
+												<span class="time">4:58</span>
+											</li>
+											<li class="tracklist__item tracklist__item--active">
+												<span class="number">3</span>
+												<span class="title">Don't Stop</span>
+												<span class="time">2:40</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">4</span>
+												<span class="title">Above</span>
+												<span class="time">2:47</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">5</span>
+												<span class="title">Bloom</span>
+												<span class="time">6:51</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">6</span>
+												<span class="title">Moon</span>
+												<span class="time">3:54</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">7</span>
+												<span class="title">Star</span>
+												<span class="time">4:01</span>
+											</li>
+											<li class="tracklist__item">
+												<span class="number">8</span>
+												<span class="title">Wow</span>
+												<span class="time">3:39</span>
+											</li>
+										</ul>
+									</div>
+									<!-- end tab1 -->
+
+									<!-- tab2 -->
+									<div role="tabpanel" class="tab-pane fade" id="tab2">
+										<!-- comments -->
+										<div class="row">
+											<div class="col-xs-12 col-lg-10">
+												<div class="comments">
+													<ul class="comments__list">
+														<li class="comments__item">
+															<div class="comments__autor">
+																<img src="img/user.png" alt="">
+																<span class="name">John Doe</span>
+																<span class="time">53m ago</span>
+															</div>
+															<p class="comments__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+														</li>
+
+														<li class="comments__item">
+															<div class="comments__autor">
+																<img src="img/user.png" alt="">
+																<span class="name">John Doe</span>
+																<span class="time">21m ago</span>
+															</div>
+															<p class="comments__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+														</li>
+													</ul>
+
+													<form action="#" class="form form--comments">
+														<div class="row">
+															<div class="col-xs-12 col-sm-8 col-md-7 col-lg-6">
+																<div class="form__group">
+																	<label for="text" class="form__label">Add Comment</label>
+																	<textarea id="text" name="text" class="form__textarea"></textarea>
+																</div>
+																<button type="button" class="default-btn form__btn">Send</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- end comments -->
+									</div>
+									<!-- end tab2 -->
+								</div>
+							
+							</div>
+						</div>
+						<!-- end tabs -->
+					</div>
+				</section>		
+			</div>
+		</main>
+	</div>
+</template>
+
+<template id="edit-synth-page">
+    		<div>
+    <h2>Create a new sound:</h2>
+    	<button id="sampler" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
+  	<label> delay <input type="text" value="50" class="delay-dial"> </label>
+  	<label> filter <input type="text" value="50" class="filter-dial"> </label>
+  		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
+      name: <input type="text" name="name" v-model="newSynth.name">
+    </div>
+
+    <div>
+      audio file: <input type="file" v-on:change="createSynth($event)">
+    </div>
+    <div  v-for="synth in synths">
+      <p> {{ synth.name }} </p>
+      <audio controls>
+       <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
+       		 <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
+    </div>
+
 </template>
