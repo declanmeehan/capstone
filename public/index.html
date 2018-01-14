@@ -1116,23 +1116,22 @@
 </template>
 
 <template id="edit-synth-page">
-    		<div>
+	<div class="container">
+		 <div>
     <h2>Create a new sound:</h2>
-    	<button id="sampler" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
+    	<button id="sampler" class="btn btn-primary" v-on:click="playSample()"> play </button>
+    	<button class="btn btn-primary" v-on:click="submit()">Submit</button>
   	<label> delay <input type="text" value="50" class="delay-dial"> </label>
   	<label> filter <input type="text" value="50" class="filter-dial"> </label>
   		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
-      name: <input type="text" name="name" v-model="newSynth.name">
     </div>
-
-    <div>
-      audio file: <input type="file" v-on:change="createSynth($event)">
-    </div>
-    <div  v-for="synth in synths">
-      <p> {{ synth.name }} </p>
+    <div v-for="synth in synths">
+      <h1>{{ synth.name }} </h1>
+       First Name
+    <input type="text" v-model="synth.name">
       <audio controls>
        <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
-       		 <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
+       <router-link v-bind:to="{ path: '/profile' }">Back to profile </router-link>
     </div>
-
+	</div>
 </template>

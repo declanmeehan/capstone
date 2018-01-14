@@ -128,15 +128,7 @@ var ProfilePage = {
       });
     }
   },
-  computed: {
-    mounted: function() {
-      axios.get("/v1/synths/:id").then(
-        function(response) {
-          this.synths = response.data;
-        }.bind(this)
-      );
-    }
-  }
+  computed: {}
 };
 
 var SignupPage = {
@@ -217,7 +209,63 @@ var AlbumPage = {
   template: "#album-page"
 };
 
-var EditSynthPage = {};
+var EditSynthPage = {
+  template: "#edit-synth-page",
+  data: function() {
+    return {
+      synths: []
+    };
+  },
+  mounted: function() {
+    axios.get("/v1/synths/" + this.$route.params.id).then(
+      function(response) {
+        this.synths = response.data;
+        console.log(this.synths[0].url);
+      }.bind(this)
+    );
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        name: this.name
+        // input_last: this.last_name,
+        // input_email: this.email,
+        // input_phone: this.phone_number
+      };
+      axios.patch("/v1/synths/" + this.$route.params.id, params);
+    },
+    playSample: function() {
+      var sampleVar = new Tone.Sampler(
+        {
+          C3: this.synths[0].url
+        },
+        function() {
+          sampleVar.triggerAttack("C3");
+        }
+      );
+      var delay = new Tone.FeedbackDelay("16n", declanDelayKnob).toMaster();
+      var filter = new Tone.Filter(declanFilterKnob, "bandpass").toMaster();
+      var pitch = new Tone.PitchShift(declanPitchKnob).toMaster();
+
+      //connections
+
+      sampleVar.connect(filter);
+      filter.connect(delay);
+      sampleVar.connect(pitch);
+
+      // end connections
+
+      var melody = new Tone.Sequence(setPlay).start();
+      melody.loop = 1;
+      Tone.Transport.bpm.value = 90;
+      Tone.Transport.start();
+      function setPlay(time, note) {
+        sampleVar.triggerAttackRelease(note, "2n", time);
+        console.log(this.synths.url);
+      }
+    }
+  }
+};
 
 var router = new VueRouter({
   routes: [
@@ -227,7 +275,7 @@ var router = new VueRouter({
     { path: "/logout", component: LogoutPage },
     { path: "/profile", component: ProfilePage },
     { path: "/album", component: AlbumPage },
-    { path: "/edit/:id", component: EditSynthPage }
+    { path: "/synths/edit/:id", component: EditSynthPage }
   ]
 });
 
