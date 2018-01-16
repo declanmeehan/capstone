@@ -27,20 +27,6 @@
 //   });
 // }
 
-var declanGainKnobVariable = 0;
-
-// $(document).ready(function() {
-//   $(function() {
-//     $(".dial").knob(
-//       {
-//         change: function(value) {
-//           declanGainKnobVariable = value;
-//         }
-//       },
-//       {
-//         height: 50,
-//         width: 50
-//       }
-//     );
-//   });
-// });
+// recordVar.connect(dest);
+// Tone.js:1725 Uncaught Error: error connecting to node: [object MediaStreamAudioDestinationNode]
+// InvalidAccessError: Failed to execute 'connect' on 'AudioNode': cannot connect to a destination belonging to a different audio context.
