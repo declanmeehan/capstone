@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   namespace :v1 do 
     get "/tags" => "tags#index"
     post "/tags" => "tags#create"
+    
   end
 
   namespace :v1  do

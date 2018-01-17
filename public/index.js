@@ -186,6 +186,7 @@ var EditSynthPage = {
     axios.get("/v1/synths/" + this.$route.params.id).then(
       function(response) {
         this.synths = response.data;
+        this.tags = response.data[0].tags;
       }.bind(this)
     );
     /* jquery */
@@ -226,6 +227,18 @@ var EditSynthPage = {
       });
     });
   },
+  updated: function() {
+    this.tags.forEach(function(index) {
+      var span = document.createElement("span");
+      $(span)
+        .addClass("inner badge badge-primary")
+        .html(index + " &times;");
+      $("#container").append(span);
+      $(span).on("click", function() {
+        $(span).remove();
+      });
+    });
+  },
 
   methods: {
     createTags: function(event) {
@@ -250,8 +263,10 @@ var EditSynthPage = {
     },
     submit: function() {
       var params = {
-        name: this.synths[0].name
+        name: this.synths[0].name,
+        tags: this.tags
       };
+      console.log(params);
 
       axios.patch("/v1/synths/" + this.$route.params.id, params);
       console.log("success");
@@ -353,7 +368,8 @@ var router = new VueRouter({
     { path: "/logout", component: LogoutPage },
     { path: "/profile", component: ProfilePage },
     { path: "/album", component: AlbumPage },
-    { path: "/synths/edit/:id", component: EditSynthPage }
+    { path: "/synths/edit/:id", component: EditSynthPage },
+    { path: "/tags/:id", component: EditSynthPage }
   ]
 });
 

@@ -12,13 +12,15 @@ class Synth < ApplicationRecord
     content_type: {
       content_type: [/.*/]
     }
+   
 
   def as_json
     {
       id: id,
       name: name,
       user_id: user_id,
-      url: audioFile
+      url: audioFile,
+      tags: tags.pluck(:name)
     }
   end
 end
