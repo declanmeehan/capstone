@@ -5,16 +5,6 @@ var declanFilterKnob = 0;
 var declanPitchKnob = 0;
 var declanMainSound = "";
 
-function declanAddTag(addtag) {
-  var div = document.createElement("div");
-  var divcontent = document.getElementById("action").textContent;
-  console.log(divcontent);
-  $(div)
-    .addClass("inner")
-    .html(divcontent);
-  $("#container").append(div);
-}
-
 var HomePage = {
   template: "#home-page"
 };
@@ -183,6 +173,8 @@ var EditSynthPage = {
   data: function() {
     return {
       synths: [],
+      name: [],
+      tags: [],
       audioContext: null
     };
   },
@@ -194,7 +186,6 @@ var EditSynthPage = {
     axios.get("/v1/synths/" + this.$route.params.id).then(
       function(response) {
         this.synths = response.data;
-        console.log(this.synths[0].url);
       }.bind(this)
     );
     /* jquery */
@@ -235,15 +226,35 @@ var EditSynthPage = {
       });
     });
   },
+
   methods: {
+    createTags: function(event) {
+      // var that = this.tags;
+      var dropText = event.currentTarget.id;
+      console.log(dropText);
+      var span = document.createElement("span");
+      $(span)
+        .addClass("inner badge badge-primary")
+        .html(dropText + " &times;");
+      $("#container").append(span);
+      this.tags.push(dropText);
+
+      $(span).on(
+        "click",
+        function() {
+          $(span).remove();
+          this.tags.shift();
+        }.bind(this)
+      );
+      console.log(this.tags);
+    },
     submit: function() {
       var params = {
-        name: this.name
-        // input_last: this.last_name,
-        // input_email: this.email,
-        // input_phone: this.phone_number
+        name: this.synths[0].name
       };
+
       axios.patch("/v1/synths/" + this.$route.params.id, params);
+      console.log("success");
     },
     playSample: function() {
       console.log("the audioContext is", this.audioContext);

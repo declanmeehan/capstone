@@ -1,5 +1,5 @@
-User.create({"email" => "fake@gmail.com", "password" => "password"})
-User.create({"email" => "test@gmail.com", "password" => "password"})
+User.create({"email" => "fake@email.com", "password" => "password"})
+User.create({"email" => "test@email.com", "password" => "password"})
 Tag.create({"name" => "traffic"})
 Tag.create({"name" => "8-bit"})
 Tag.create({"name" => "filteredDrums"})

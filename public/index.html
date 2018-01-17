@@ -1122,15 +1122,14 @@
     	<button id="sampler" class="btn btn-primary" v-on:click="playSample()"> play </button>
     	<button id="recordId" v-on:click="recordButton()"> test </button>
     	 <audio controls></audio>
-    	<button class="btn btn-primary" v-on:click="submit()">Submit</button>
   	<label> delay <input type="text" value="50" class="delay-dial"> </label>
   	<label> filter <input type="text" value="50" class="filter-dial"> </label>
   		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
     </div>
     <div v-for="synth in synths">
       <h1>{{ synth.name }} </h1>
-       First Name
-    <input type="text" v-model="synth.name">
+       Name
+    <input type="text" v-model="synth.name" id="synthNameChange">
       <audio controls>
        <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
        <router-link v-bind:to="{ path: '/profile' }">Back to profile </router-link>
@@ -1139,23 +1138,17 @@
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     tags &#8964;
   </button>
-  <div class="dropdown-menu btn btn-secondary" aria-labelledby="dropdownMenuButton">
-    <p class="dropdown-item" id="action" onclick="declanAddTag(this)">Action</p>
-    <p class="dropdown-item">Another action</p>
-    <p class="dropdown-item">Something else here</p>
+  <div class="dropdown-menu btn btn-secondary" aria-labelledby="dropdownMenuButton" id="dropDownTags">
+    <p class="dropdown-item" id="traffic" v-on:click="createTags($event)">Traffic</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="8-bit">8-bit</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="filteredDrums">Filtered Drums</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="outdoors">Outdoors</p>
   </div>
+  <button class="btn btn-primary" v-on:click="submit()">Submit</button>
 </div>
 <div id="container">
-  <div class="inner">original inner div</div>
+  <div class="inner"></div>
  </div>
-       <span class="badge badge-primary">Primary</span>
-<span class="badge badge-secondary">Secondary</span>
-<span class="badge badge-success">Success</span>
-<span class="badge badge-danger">Danger</span>
-<span class="badge badge-warning">Warning</span>
-<span class="badge badge-info">Info</span>
-<span class="badge badge-light">Light</span>
-<span class="badge badge-dark">Dark</span>
 </div>
     </div>
 	</div>

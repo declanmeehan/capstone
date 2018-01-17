@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/synths/user/:user_id" => "synths#userProfilePublic"
   get "/synths/private" => "synths#userProfilePrivate"
   get "/synths/:id" => "synths#show"
+  patch "synths/:id" => "synths#update"
 
   end
   namespace :v1 do 
