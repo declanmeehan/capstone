@@ -12,6 +12,7 @@ class Synth < ApplicationRecord
     content_type: {
       content_type: [/.*/]
     }
+
    
 
   def as_json
@@ -20,7 +21,8 @@ class Synth < ApplicationRecord
       name: name,
       user_id: user_id,
       url: audioFile,
-      tags: tags.pluck(:name)
+      # tags: tags.map { |tag| {id: tag.id, name: tag.name }}
+      tags: tags.as_json
     }
   end
 end

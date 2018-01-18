@@ -175,6 +175,7 @@ var EditSynthPage = {
       synths: [],
       name: [],
       tags: [],
+      tagIds: [],
       audioContext: null
     };
   },
@@ -232,44 +233,61 @@ var EditSynthPage = {
       var span = document.createElement("span");
       $(span)
         .addClass("inner badge badge-primary")
-        .html(index + " &times;");
-      $("#container").append(span);
-      $(span).on("click", function() {
-        $(span).remove();
-      });
+        .attr("id", index.id)
+        .html(index.name + " &times;");
+      $("#dropContainer").append(span);
+      $(span).on(
+        "click",
+        function() {
+          $(span).remove();
+        }.bind(this)
+      );
     });
   },
 
   methods: {
     createTags: function(event) {
       // var that = this.tags;
-      var dropText = event.currentTarget.id;
+      var dropText = event.currentTarget.textContent;
+      var clickId = event.currentTarget.id;
       console.log(dropText);
       var span = document.createElement("span");
       $(span)
         .addClass("inner badge badge-primary")
+        .attr("id", clickId)
         .html(dropText + " &times;");
-      $("#container").append(span);
-      this.tags.push(dropText);
+      $("#dropContainer").append(span);
+      // this.tagIds.push(clickId);
 
       $(span).on(
         "click",
         function() {
           $(span).remove();
-          this.tags.shift();
+
+          // this.tagIds.splice(clickId, 1);
         }.bind(this)
       );
-      console.log(this.tags);
     },
     submit: function() {
+      $("#dropContainer")
+        .find("span")
+        .each(
+          function() {
+            this.tagIds.push(this.id);
+          }.bind(this)
+        );
+      console.log(this.tagIds);
       var params = {
-        name: this.synths[0].name,
-        tags: this.tags
+        name: this.synths[0].name
       };
-      console.log(params);
+      var tagParams = [];
+      // for (i = 0; i <= tagsId.length; i++) {
+      //   tagParams.push({synth_id: this.synths[0].id, tag_id: tagsId[i]})
+      // };
+      // console.log(tagParams);
 
       axios.patch("/v1/synths/" + this.$route.params.id, params);
-      console.log("success");
+      axios.patch("/v1/synth_tags/", tagParams);
     },
     playSample: function() {
       console.log("the audioContext is", this.audioContext);
@@ -360,6 +378,23 @@ var EditSynthPage = {
   }
 };
 
+var ShowTagPage = {
+  template: "#show-tag-page",
+  data: function() {
+    return {
+      synths: []
+    };
+  },
+  mounted: function() {
+    axios.get("/v1/synths/").then(
+      function(response) {
+        this.synths = response.data;
+        console.log(this.synths);
+      }.bind(this)
+    );
+  }
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
@@ -369,7 +404,7 @@ var router = new VueRouter({
     { path: "/profile", component: ProfilePage },
     { path: "/album", component: AlbumPage },
     { path: "/synths/edit/:id", component: EditSynthPage },
-    { path: "/tags/:id", component: EditSynthPage }
+    { path: "/tags/:id", component: ShowTagPage }
   ]
 });
 
