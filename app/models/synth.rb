@@ -13,16 +13,14 @@ class Synth < ApplicationRecord
       content_type: [/.*/]
     }
 
-   
-
   def as_json
     {
       id: id,
       name: name,
       user_id: user_id,
       url: audioFile,
-      # tags: tags.map { |tag| {id: tag.id, name: tag.name }}
-      tags: tags.as_json
+      tags: tags.map { |tag| {id: tag.id, name: tag.name }}
+      # tags: tags.as_json
     }
   end
 end

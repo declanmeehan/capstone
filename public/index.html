@@ -852,15 +852,43 @@
       name: <input type="text" name="name" v-model="newSynth.name">
     </div>
 
+
     <div>
       audio file: <input type="file" v-on:change="createSynth($event)">
     </div>
-    <div  v-for="synth in synths">
+    <div v-for="synth in synths">
       <p> {{ synth.name }} </p>
       <audio controls>
-       <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
-       		 <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
+      	<source v-bind:src="synth.url" type="audio/x-wav"> 
+      </audio>
+      <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
+       	<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    note &#8964;
+  </button>
+    	<button type="button" class="dropdown-menu btn btn-secondary" aria-labelledby="dropdownMenuButton" id="dropDownTags">
+    <p class="dropdown-item" id="C4" v-on:click="createTags($event)">C</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="D4">D</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="E4">E</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="F4">F</p>
+  </div>
+  <div id="dropContainer">
+  <div class="inner"></div>
+  </div>
     </div>
+    <h1> SAMPLER </h1>
+     <div class="keys" id="key-container">
+     	 <div data-key="65" class="key">A</div>
+     	 <div data-key="83" class="key ">S</div>
+       <div data-key="68" class="key ">D</div>
+       <div data-key="70" class="key ">F</div>
+       <div data-key="71" class="key ">G</div>
+       <div data-key="72" class="key ">H</div>
+       <div data-key="74" class="key ">J</div>
+       <div data-key="75" class="key ">K</div>
+       <div data-key="76" class="key ">L</div>
+     </div>
+  </div>
 	</template>
 
 <template id="signup-page">
@@ -1154,10 +1182,12 @@
 	<div class="container">
 		<br><br>
 <br>	<br>
-		<div v-for="synth in synths">
-			 <div v-if="synth.id === $route.params"> -->
-			<h1>{{ synth.name }}</h1>
+		<div  v-for="synth in synths">
+      <p> {{ synth.name }} </p>
+      <audio controls>
+       <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
 	</div>
- -->		</div>
+	<button v-on:click="testing()">testing</button>
+	</div>
 	</div>
 </template>

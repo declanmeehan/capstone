@@ -18,6 +18,15 @@ var ProfilePage = {
       user: ""
     };
   },
+  created: function() {
+    //plays audio from pressing certain key
+    // window.addEventListener("keydown", function(e) {
+    //   const audio = document.querySelector(`audio[data-key="${e.keyCode}" ]`);
+    //   if (!audio) return;
+    // stop the function from running
+    //   audio.play();
+    // });
+  },
   mounted: function() {
     axios.get("/v1/synths/private").then(
       function(response) {
@@ -26,6 +35,12 @@ var ProfilePage = {
     );
   },
   methods: {
+    CreateSampler: function() {},
+    FullSynth: function() {
+      var sampleVar = new Tone.Sampler({
+        C3: this.synths[0].url
+      });
+    },
     createSynth: function(event) {
       if (event.target.files.length > 0) {
         var formData = new FormData();
@@ -236,12 +251,13 @@ var EditSynthPage = {
         .attr("id", index.id)
         .html(index.name + " &times;");
       $("#dropContainer").append(span);
-      $(span).on(
-        "click",
-        function() {
-          $(span).remove();
-        }.bind(this)
-      );
+
+      // $(span).on(
+      //   "click",
+      //   function() {
+      //     $(span).remove();
+      //   }.bind(this)
+      // );
     });
   },
 
@@ -258,36 +274,49 @@ var EditSynthPage = {
         .html(dropText + " &times;");
       $("#dropContainer").append(span);
       // this.tagIds.push(clickId);
-
-      $(span).on(
-        "click",
-        function() {
-          $(span).remove();
-
-          // this.tagIds.splice(clickId, 1);
-        }.bind(this)
-      );
+      var params = {
+        synth_id: this.synths[0].id,
+        tag_id: Number(clickId)
+      };
+      console.log(this.synths[0].id);
+      axios.post("/synth_tags", params);
+    },
+    removeTags: function() {
+      $("#dropContainer")
+        .children()
+        .each(function() {
+          var $span = $(this);
+          $span.on(
+            "click",
+            function() {
+              $span.remove();
+            }.bind(this)
+          );
+        });
     },
     submit: function() {
+      var tagIdsArr = [];
       $("#dropContainer")
-        .find("span")
-        .each(
-          function() {
-            this.tagIds.push(this.id);
-          }.bind(this)
-        );
-      console.log(this.tagIds);
+        .children()
+        .each(function(index) {
+          var $span = $(this);
+          var spanId = $span.attr("id");
+          tagIdsArr.push(Number(spanId));
+        });
+      tagIdsArr.filter(Boolean);
+      console.log(tagIdsArr);
       var params = {
         name: this.synths[0].name
       };
       var tagParams = [];
-      // for (i = 0; i <= tagsId.length; i++) {
-      //   tagParams.push({synth_id: this.synths[0].id, tag_id: tagsId[i]})
-      // };
-      // console.log(tagParams);
+      for (var i = 0; i <= tagIdsArr.length; i++) {
+        tagParams.push({ synth_id: this.synths[0].id, tag_id: tagIdsArr[i] });
+      }
+      axios.patch("/synth_tags/", tagParams);
+
+      console.log(tagParams);
 
       axios.patch("/v1/synths/" + this.$route.params.id, params);
-      axios.patch("/v1/synth_tags/", tagParams);
     },
     playSample: function() {
       console.log("the audioContext is", this.audioContext);
@@ -382,16 +411,40 @@ var ShowTagPage = {
   template: "#show-tag-page",
   data: function() {
     return {
-      synths: []
+      synths: [],
+      tag: {}
     };
   },
-  mounted: function() {
-    axios.get("/v1/synths/").then(
+  created: function() {
+    axios.get("/v1/tags/" + this.$route.params.id).then(
       function(response) {
-        this.synths = response.data;
-        console.log(this.synths);
+        this.tag = response.data;
+        this.synths = response.data.synths;
       }.bind(this)
     );
+  },
+  //NOT WORKING, GRAB EVERY SYNTH AND THEN CHECK IF EACH TAG ID EQUALS PAGE NUMBER
+  // updated: function() {
+  //   var itemId = Number(this.$route.params.id);
+  //   this.synths.forEach(
+  //     function(i) {
+  //       i.tags.forEach(
+  //         function(n) {
+  //           console.log(n.id, itemId);
+  //           //These are correct synth tag id and page id
+  //           if (n.id === itemId) {
+  //             console.log(n);
+  //             this.tags.push(i);
+  //           }
+  //         }.bind(this)
+  //       );
+  //     }.bind(this)
+  //   );
+  // },
+  methods: {
+    testing: function() {
+      console.log("tags", this.tags);
+    }
   }
 };
 

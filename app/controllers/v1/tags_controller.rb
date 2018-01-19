@@ -14,4 +14,9 @@ class V1::TagsController < ApplicationController
       render json: {errors: tag.errors.full_messages}, status: :bad_request
     end
   end
+
+  def show
+    tag = Tag.find_by(id: params[:id])
+    render json: tag.as_json
+  end
 end
