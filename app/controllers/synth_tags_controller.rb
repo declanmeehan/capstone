@@ -17,8 +17,9 @@ class SynthTagsController < ApplicationController
     end
 
     def destroy
-    synthTag = SynthTag.find_by(id: params[:id])
-    synthTag.destroy
+      synthid = SynthTag.where(synth_id: params[:synth_id])
+
+      synthTag.destroy
     end
 
 end

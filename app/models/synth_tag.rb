@@ -1,5 +1,5 @@
 class SynthTag < ApplicationRecord
- belongs_to :synt
+ belongs_to :synth
  belongs_to :tag, optional: true
 
   def self.dedupe

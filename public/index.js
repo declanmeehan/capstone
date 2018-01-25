@@ -6,16 +6,40 @@ var declanPitchKnob = 0;
 var declanMainSound = "";
 
 var HomePage = {
-  template: "#home-page"
+  template: "#home-page",
+  data: function() {
+    return {
+      isHomePage: true
+    };
+  }
 };
 
 var ProfilePage = {
   template: "#profile-page",
+
   data: function() {
     return {
+      isHomePage: false,
       synths: [],
+      checkedNotes: [],
+      checkedNames: [],
+      beatspm: [],
       newSynth: { name: "", tags: "", audioFile: "" },
-      user: ""
+      user: "",
+      keyboardKeyNote: {
+        a: "C5",
+        w: "C#5",
+        s: "D5",
+        e: "D#5",
+        d: "E5",
+        f: "F5",
+        t: "F#5",
+        g: "G5",
+        y: "G#5",
+        h: "A5",
+        u: "A#5",
+        j: "B5"
+      }
     };
   },
   created: function() {
@@ -30,12 +54,123 @@ var ProfilePage = {
   mounted: function() {
     axios.get("/v1/synths/private").then(
       function(response) {
-        this.synths = response.data;
+        // this.synths = response.data;
+        // var index = 0;
+        // this.synths.forEach(
+        //   function(synth) {
+        //     console.log("keyboardKeyNote in loop", this.keyboardKeyNote, index);
+        //     Vue.set(synth, "note", this.keyboardKeyNote[index]);
+        //     index += 1;
+        //   }.bind(this)
+        // );
+        // console.log("....", this.keyboardKeyNote);
+        // console.log("....", Object.keys(this.keyboardKeyNote);
+        let index = 0;
+        let keyboardKeyNoteKeys = Object.keys(this.keyboardKeyNote);
+        this.synths = response.data.map(synth => {
+          synth.note = this.keyboardKeyNote[keyboardKeyNoteKeys[index]];
+          index += 1;
+          return synth;
+        });
+        $(document).ready(function() {
+          $(function() {
+            $(".beatspm").knob({
+              height: 50,
+              width: 50,
+              min: 80,
+              max: 210,
+              change: function(value) {
+                this.beatspm = value;
+                console.log("bpm" + this.beatspm);
+              }
+            });
+          });
+        });
+
+        // console.log("keyboardKeyNote", this.keyboardKeyNote);
+        // let index = 0,
+        //   kkn = this.keyboardKeyNote;
+        // this.synths = response.data.map(synth => {
+        //   console.log("attach", synth, index, kkn[index]);
+        //   synth.note = kkn[index];
+        //   index += 1;
+        //   return synth;
+        // });
       }.bind(this)
     );
   },
+  updated: function() {
+    console.log(this.beatspm);
+    console.log("checkedS!!!!!", this.checkedNotes);
+    var toneSamplerObject = {};
+    this.synths.forEach(function(synth) {
+      toneSamplerObject[synth.note] = synth.url;
+    });
+
+    var piano = new Tone.Sampler(toneSamplerObject, {
+      release: 1
+      // baseUrl: "./toneAudio/salamander/"
+    }).toMaster();
+
+    var keyboard = document.addEventListener("keydown", event => {
+      var keyName = event.key;
+      var note = this.keyboardKeyNote[keyName];
+      // var note = "a";
+
+      // switch (keyName) {
+      //   case "a":
+      //     note = "A5";
+      //     break;
+      // }
+      console.log("KEYNAME NOOOTEEE", keyName, note);
+      piano.triggerAttack(note);
+    });
+
+    // GUI //
+
+    // var a = new Interface.Panel({
+    //   container: document.querySelector("#pianoPanel")
+    // });
+
+    // var b = new Interface.Piano({
+    //   bounds: [0, 0, 1, 0.5],
+    //   startletter: "C",
+    //   startoctave: 3,
+    //   endletter: "C",
+    //   endoctave: 5,
+    //   noteLabels: false
+    // });
+    // var c = new Interface.Piano({
+    //   bounds: [0, 0.5, 1, 0.5],
+    //   startletter: "C",
+    //   startoctave: 3,
+    //   endletter: "C",
+    //   endoctave: 4
+    // });
+
+    // a.background = "black";
+    // a.add(b, c);
+    // var keyboard = Interface.Keyboard();
+    // keyboard.keyDown = function(note) {
+    //   piano.triggerAttack(note);
+    // };
+    // keyboard.keyUp = function(note) {
+    //   piano.triggerRelease(note);
+    // };
+    // Interface.Loader();
+  },
   methods: {
-    CreateSampler: function() {},
+    addNote: function(event) {
+      this.checkedNotes.push(event.currentTarget.innerHTML);
+      console.log(this.checkedNotes);
+    },
+    removeNote: function(index) {
+      this.checkedNotes.splice(index, 1);
+    },
+    AddSample: function(synth, note) {
+      // console.log(event.target);
+      synth.note = note;
+    },
     FullSynth: function() {
       var sampleVar = new Tone.Sampler({
         C3: this.synths[0].url
@@ -54,30 +189,32 @@ var ProfilePage = {
         }.bind(this)
       );
     },
-    display: function() {
+    melody: function() {
       var synth;
 
-      var melodyList = ["C2", "D3", "E3", "F2", "G1", "A2", "B2", "C2"];
+      var melodyList = this.checkedNotes;
       synth = new Tone.Synth().toMaster();
 
       var melody = new Tone.Sequence(setPlay, melodyList).start();
-      melody.loop = 1;
-
-      Tone.Transport.bpm.value = 90;
+      melody.loop = 0;
+      Tone.Transport.bpm.value = 180;
       Tone.Transport.start();
 
       function setPlay(time, note) {
-        synth.triggerAttackRelease(note, "2n", time);
+        synth.triggerAttackRelease(note, "8n", time);
       }
     },
     sampler: function() {
       axios.get("/v1/synths").then(function(response) {
         var sampleVar = new Tone.Sampler(
           {
-            C3: response.data[0].url
+            C4: "C4",
+            D4: "D4",
+            E4: "E4",
+            F4: "F4"
           },
           function() {
-            sampleVar.triggerAttack("C3");
+            sampleVar.triggerAttack("C4");
           }
         );
         var delay = new Tone.FeedbackDelay("16n", declanDelayKnob).toMaster();
@@ -109,6 +246,7 @@ var SignupPage = {
   template: "#signup-page",
   data: function() {
     return {
+      isHomePage: false,
       name: "",
       email: "",
       password: "",
@@ -142,6 +280,7 @@ var LoginPage = {
   template: "#login-page",
   data: function() {
     return {
+      isHomePage: false,
       email: "",
       password: "",
       errors: []
@@ -187,8 +326,9 @@ var EditSynthPage = {
   template: "#edit-synth-page",
   data: function() {
     return {
+      isHomePage: false,
       synths: [],
-      name: [],
+      // name: [],
       tags: [],
       tagIds: [],
       audioContext: null
@@ -197,14 +337,15 @@ var EditSynthPage = {
   created: function() {
     this.audioContext = new AudioContext();
     Tone.setContext(this.audioContext);
-  },
-  mounted: function() {
+    console.log(this.tags);
     axios.get("/v1/synths/" + this.$route.params.id).then(
       function(response) {
         this.synths = response.data;
-        this.tags = response.data[0].tags;
+        console.log("get request tags", this.tags);
       }.bind(this)
     );
+  },
+  mounted: function() {
     /* jquery */
     $(document).ready(function() {
       $(function() {
@@ -244,44 +385,65 @@ var EditSynthPage = {
     });
   },
   updated: function() {
-    this.tags.forEach(function(index) {
-      var span = document.createElement("span");
-      $(span)
-        .addClass("inner badge badge-primary")
-        .attr("id", index.id)
-        .html(index.name + " &times;");
-      $("#dropContainer").append(span);
-
-      // $(span).on(
-      //   "click",
-      //   function() {
-      //     $(span).remove();
-      //   }.bind(this)
-      // );
-    });
+    this.getTags();
+    // this.tags.forEach(function(index) {
+    //   var span = document.createElement("span");
+    //   $(span)
+    //     .addClass("inner badge badge-primary")
+    //     .attr("id", index.id)
+    //     .html(index.name + " &times;");
+    //   $("#dropContainer").append(span);
+    // });
+    // $(span).on(
+    //   "click",
+    //   function() {
+    //     $(span).remove();
+    //   }.bind(this)
+    // );
   },
 
   methods: {
+    getTags: function() {
+      this.tags = this.synths[0].tags;
+      this.tags.forEach(function(index) {
+        //if there is not already a span with tag id
+        // if ($("#dropContainer").not(':has($span).attr("id", index.id)'))
+        if (document.getElementsByClassName(index.id).length === 0) {
+          console.log("index" + index.id);
+          var span = document.createElement("span");
+          $(span)
+            .addClass("inner badge badge-primary" + " " + index.id)
+            .attr("id", index.id)
+            .html(index.name + " &times;");
+          $("#dropContainer").append(span);
+        }
+      });
+    },
     createTags: function(event) {
       // var that = this.tags;
       var dropText = event.currentTarget.textContent;
       var clickId = event.currentTarget.id;
-      console.log(dropText);
-      var span = document.createElement("span");
-      $(span)
-        .addClass("inner badge badge-primary")
-        .attr("id", clickId)
-        .html(dropText + " &times;");
-      $("#dropContainer").append(span);
+
+      console.log("click Id", clickId);
+      if (document.getElementsByClassName(clickId).length === 0) {
+        var span = document.createElement("span");
+        $(span)
+          .addClass("inner badge badge-primary" + " " + clickId)
+          .attr("id", clickId)
+          .html(dropText + " &times;");
+        $("#dropContainer").append(span);
+        var params = {
+          synth_id: this.synths[0].id,
+          tag_id: Number(clickId)
+        };
+        console.log(params);
+        axios.post("/synth_tags", params);
+      }
       // this.tagIds.push(clickId);
-      var params = {
-        synth_id: this.synths[0].id,
-        tag_id: Number(clickId)
-      };
-      console.log(this.synths[0].id);
-      axios.post("/synth_tags", params);
     },
     removeTags: function() {
+      var currtag = "";
+      var removetagsynthid = this.synths[0].id;
       $("#dropContainer")
         .children()
         .each(function() {
@@ -289,34 +451,42 @@ var EditSynthPage = {
           $span.on(
             "click",
             function() {
+              currtag = $(this).attr("id");
+              var params = {
+                synth_id: removetagsynthid,
+                tag_id: Number(currtag)
+              };
+              axios.delete("/synth_tags", params);
+              console.log("this is params", params);
               $span.remove();
             }.bind(this)
           );
         });
     },
     submit: function() {
-      var tagIdsArr = [];
-      $("#dropContainer")
-        .children()
-        .each(function(index) {
-          var $span = $(this);
-          var spanId = $span.attr("id");
-          tagIdsArr.push(Number(spanId));
-        });
-      tagIdsArr.filter(Boolean);
-      console.log(tagIdsArr);
+      // var tagIdsArr = [];
+      // $("#dropContainer")
+      //   .children()
+      //   .each(function(index) {
+      //     var $span = $(this);
+      //     var spanId = $span.attr("id");
+      //     tagIdsArr.push(Number(spanId));
+      //   });
+      // tagIdsArr.filter(Boolean);
+      // console.log(tagIdsArr);
       var params = {
         name: this.synths[0].name
       };
-      var tagParams = [];
-      for (var i = 0; i <= tagIdsArr.length; i++) {
-        tagParams.push({ synth_id: this.synths[0].id, tag_id: tagIdsArr[i] });
-      }
-      axios.patch("/synth_tags/", tagParams);
+      // var tagParams = [];
+      // for (var i = 0; i <= tagIdsArr.length; i++) {
+      //   tagParams.push({ synth_id: this.synths[0].id, tag_id: tagIdsArr[i] });
+      // }
+      // axios.patch("/synth_tags/", tagParams);
 
-      console.log(tagParams);
+      // console.log(tagParams);
 
       axios.patch("/v1/synths/" + this.$route.params.id, params);
+      router.push("/profile");
     },
     playSample: function() {
       console.log("the audioContext is", this.audioContext);
@@ -351,14 +521,15 @@ var EditSynthPage = {
     },
     /* ^^^^ jquery */
     recordButton: function() {
+      var capturing = false;
       // Tone.setContext(ac);
+      var recorder = new MediaRecorder(stream);
+
       var recordVar = new Tone.Sampler(
         {
           C3: this.synths[0].url
         },
-        function() {
-          recordVar.triggerAttack("C3");
-        }
+        function() {}
       );
       var delay = new Tone.FeedbackDelay("16n", declanDelayKnob).toMaster();
       var filter = new Tone.Filter(declanFilterKnob, "bandpass").toMaster();
@@ -367,42 +538,46 @@ var EditSynthPage = {
 
       recordVar.chain(filter, delay, pitch).toMaster();
 
-      var b = document.getElementById("recordId");
-      var clicked = false;
-      var chunks = [];
-      var ac = this.audioContext;
-      var osc = ac.createOscillator();
-      var dest = ac.createMediaStreamDestination();
-      var mediaRecorder = new MediaRecorder(dest.stream);
-      recordVar.context;
-      Tone.setContext(ac);
-      recordVar.connect(dest);
+      //   var canvas = document.querySelector("canvas");
+      //   var audio = document.querySelector("audio");
+      //   var stream = canvas.captureStream();
+      //   audio.srcObject() = stream;
 
-      b.addEventListener("click", function(e) {
-        if (!clicked) {
-          mediaRecorder.start();
-          osc.start(0);
+      //   var b = document.getElementById("recordId");
+      //   var clicked = false;
+      //   var chunks = [];
+      //   var ac = new this.audioContext();
+      //   var osc = ac.createOscillator();
+      //   var dest = ac.createMediaStreamDestination();
+      //   var mediaRecorder = new MediaRecorder(dest.stream);
+      //   recordVar.context;
+      //   Tone.setContext(ac);
+      //   recordVar.connect(ac.destination);
 
-          recordVar;
-          e.target.innerHTML = "Stop recording";
-          clicked = true;
-        } else {
-          mediaRecorder.stop();
-          osc.stop(0);
-          e.target.disabled = true;
-        }
-      });
+      //   b.addEventListener("click", function(e) {
+      //     if (!clicked) {
+      //       mediaRecorder.start();
+      //       osc.start(0);
+      //       recordVar;
+      //       e.target.innerHTML = "Stop recording";
+      //       clicked = false;
+      //     } else {
+      //       mediaRecorder.stop();
+      //       osc.stop(0);
+      //       e.target.disabled = false;
+      //     }
+      //   });
 
-      mediaRecorder.ondataavailable = function(evt) {
-        // push each chunk (blobs) in an array
-        chunks.push(evt.data);
-      };
+      //   mediaRecorder.ondataavailable = function(evt) {
+      //     // push each chunk (blobs) in an array
+      //     chunks.push(evt.data);
+      //   };
 
-      mediaRecorder.onstop = function(evt) {
-        // Make blob out of our blobs, and open it.
-        var blob = new Blob(chunks, { type: "audio/x-wav; codecs=opus" });
-        document.querySelector("audio").src = URL.createObjectURL(blob);
-      };
+      //   mediaRecorder.onstop = function(evt) {
+      //     // Make blob out of our blobs, and open it.
+      //     var blob = new Blob(chunks, { type: "audio/x-wav; codecs=opus" });
+      //     document.querySelector("audio").src = URL.createObjectURL(blob);
+      //   };
     }
   }
 };
@@ -411,6 +586,7 @@ var ShowTagPage = {
   template: "#show-tag-page",
   data: function() {
     return {
+      isHomePage: false,
       synths: [],
       tag: {}
     };
@@ -458,16 +634,30 @@ var router = new VueRouter({
     { path: "/album", component: AlbumPage },
     { path: "/synths/edit/:id", component: EditSynthPage },
     { path: "/tags/:id", component: ShowTagPage }
-  ]
+  ],
+  scrollBehavior: function(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
 });
 
 var app = new Vue({
   el: "#app",
   router: router,
+  data: function() {
+    return {
+      isHomePage: false
+    };
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  },
+  watch: {
+    $route: function() {
+      console.log("route changed?");
+      location.reload();
     }
   }
 });

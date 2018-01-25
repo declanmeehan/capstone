@@ -1,0 +1,26 @@
+.importantright {
+  float: right;
+}
+
+.importantcenter {
+  padding-top: 50px;
+  margin: auto;
+  width: 60%;
+}
+
+.bottomimportant {
+  position: fixed;
+  bottom: 0em;
+  width: 100%;
+}
+
+.clearroomforfooter {
+  padding-bottom: 10em;
+}
+
+.tagNameCenter {
+  padding: 40px;
+  margin: auto;
+
+  width: 60%;
+}

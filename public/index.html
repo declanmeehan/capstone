@@ -16,6 +16,14 @@
   <script src="index.js" defer></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.51/Tone.js"></script>
   <script type="text/javascript" src="test.js"></script>
+  <script src="./toneScripts/draggabilly.js"></script>
+		<script src="./toneScripts/StartAudioContext.js"></script>
+		<script src="./toneScripts/interface.js"></script>
+		<script src="./toneScripts/ToneInterface.js"></script>
+		<script src="https://tonejs.github.io/Logo/build/Logo.js"></script>
+		<script src="./toneScripts/jquery.min.js"></script>
+		<script src="./toneScripts/Keyboard.js"></script>
+
 
 
 	<!-- Favicons -->
@@ -37,14 +45,11 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 	<link rel="stylesheet" href="css/main.css">
-
-
-
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
 	<div id="app">
-		<router-view></router-view>
 	<!-- header -->
 	<header class="header">
 		<div class="row">
@@ -58,7 +63,7 @@
 
 				<!-- logo -->
 				<a class="header__logo" href="/#/">
-					<img src="img/logo.png" alt="">
+					<img src="./pictures/SampleSpotter.png"  alt="">
 				</a>
 				<!-- end logo -->
 
@@ -78,7 +83,7 @@
 
 					<li class="header__actions-item">
 						<button class="header__user-btn" data-toggle="dropdown" aria-expanded="false">
-							<img src="pictures/profile1-icon.jpg" alt="">
+							<img src="pictures/profile1-icon.png" alt="">
 						</button>
 
 						<ul class="header__user-menu">
@@ -196,53 +201,56 @@
 		</div>
 	</aside>
 	<!-- end sidebar -->
-	</div>
 	<!-- content -->
-					<!-- footer -->
-					<div class="footer">
-						<div class="row">
 
-							<div class="col-xs-12 col-sm-6">
-								<div class="footer__logo">
-									<a href="/#/"><img src="img/logo--white.png" alt=""></a>
-								</div>
-							</div>
+	<div style="min-height: 85vh">
+		<router-view></router-view>
+	</div>
 
-							<div class="col-xs-12 col-sm-6">
-								<ul class="footer__social">
-									<li>
-										<a href="#">
-											<i class="fa fa-soundcloud"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-spotify"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-facebook-official"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-instagram"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- end footer -->
+
+	<!-- footer -->
+	<div class="footer" class="bottomimportant">
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-6">
+				<div class="footer__logo">
+					<a href="/#/"><img src="./pictures/SampleFoot.png" alt=""></a>
 				</div>
-			</main>
-		</div>	
+			</div>
+
+			<div class="col-xs-12 col-sm-6">
+				<ul class="footer__social">
+					<li>
+						<a href="#">
+							<i class="fa fa-soundcloud"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-spotify"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-facebook-official"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-twitter"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-instagram"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end footer -->
+	</div>
 
 	<!-- end content -->
 	
@@ -406,7 +414,7 @@
 							<!-- release -->
 							<div class="col-xs-6 col-sm-3">
 								<article class="release-post">
-									<figure class="release-post__cover"><a href="/#/tags/2"><img src="./pictures/album2.jpg" alt=""></a></figure>
+									<figure class="release-post__cover"><a href="/#/tags/2"><img src="./pictures/album2.gif" alt=""></a></figure>
 
 									<header class="release-post__header">
 										<h2 class="release-post__title"><a href="/#/tags/2">Video Game 8-bit</a></h2>
@@ -433,7 +441,7 @@
 									<figure class="release-post__cover"><a href="/#/tags/4"><img src="./pictures/album4.jpg" alt=""></a></figure>
 
 									<header class="release-post__header">
-										<h2 class="release-post__title"><a href="/#/tags/4">Outdoors</a></h2>
+										<h2 class="release-post__title"><a href="/#/tags/4">Piano</a></h2>
 									</header>
 								</article>
 							</div>
@@ -442,457 +450,117 @@
 					</section>
 					<!-- end new releases -->
 
-					<!-- upcoming events -->
-					<section class="section">
-						<div class="row">
-							<!-- section title -->
-							<div class="col-xs-12 col-sm-4 col-md-3">
-								<div class="section__title section__title--vertical clearfix">
-									<h2>Upcoming Events</h2>
-									<p>Here's everything you need to know about each major music event!</p>
-									<a class="section__more" href="events.html">See All</a>
-								</div>
-							</div>
-							<!-- end section title -->
-
-							<!-- article carousel -->
-							<div class="col-xs-12 col-sm-8 col-md-9">
-								<div class="article-carousel-wrap">
-									<div class="article-carousel owl-carousel">
-										<!-- slide -->
-										<article class="item event-post" data-bg="img/events/event.jpg">
-											<header class="event-post__header">
-												<div class="event-post__date">March 11, 2017</div>
-												<div class="event-post__time">8:00 pm</div>
-												<h2 class="event-post__title"><a href="event.html">Sorry Babushka</a></h2>
-												<div class="event-post__address">1 East Plumb Branch St.Saint Petersburg, FL 33702</div>
-											</header>
-											
-											<button class="event-post__buy-ticket">buy ticket</button>
-										</article>
-										<!-- end slide -->
-
-										<!-- slide -->
-										<article class="item event-post" data-bg="img/events/event.jpg">
-											<header class="event-post__header">
-												<div class="event-post__date">March 16, 2017</div>
-												<div class="event-post__time">6:00 pm</div>
-												<h2 class="event-post__title"><a href="event.html">Big Daddy</a></h2>
-												<div class="event-post__address">71 Pilgrim Avenue Chevy Chase, MD 20815</div>
-											</header>
-											
-											<button class="event-post__buy-ticket">buy ticket</button>
-										</article>
-										<!-- end slide -->
-
-										<!-- slide -->
-										<article class="item event-post" data-bg="img/events/event.jpg">
-											<header class="event-post__header">
-												<div class="event-post__date">March 22, 2017</div>
-												<div class="event-post__time">7:30 pm</div>
-												<h2 class="event-post__title"><a href="event.html">Rocky Pub</a></h2>
-												<div class="event-post__address">514 S. Magnolia St. Orlando, FL 32806</div>
-											</header>
-											
-											<div class="event-post__sold-out">sold out</div>
-										</article>
-										<!-- end slide -->
-
-										<!-- slide -->
-										<article class="item event-post" data-bg="img/events/event.jpg">
-											<header class="event-post__header">
-												<div class="event-post__date">March 30, 2017</div>
-												<div class="event-post__time">8:00 pm</div>
-												<h2 class="event-post__title"><a href="event.html">Big Club</a></h2>
-												<div class="event-post__address">123 6th St. Melbourne, FL 32904</div>
-											</header>
-											
-											<button class="event-post__buy-ticket">buy ticket</button>
-										</article>
-										<!-- end slide -->
-									</div>
-
-									<button class="article-carousel-nav__prev">
-										<span class="lnr lnr-arrow-left"></span>
-									</button>
-									<button class="article-carousel-nav__next">
-										<span class="lnr lnr-arrow-right"></span>
-									</button>
-								</div>
-							</div>
-							<!-- end article carousel -->
-						</div>
-					</section>
-					<!-- end upcoming events -->
-
-					<!-- new singles -->
-					<section class="section">
-						<div class="row row--grid">
-							<!-- section title -->
-							<div class="col-xs-12">
-								<div class="section__title clearfix">
-									<h2>New Singles</h2>
-								</div>
-							</div>
-							<!-- end section title -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Forest</span>
-										<span class="autor">Chris S.</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Love</span>
-										<span class="autor">John Doe</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Black Mold</span>
-										<span class="autor">Taylor</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">For You</span>
-										<span class="autor">Taylor</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Audio Jungle</span>
-										<span class="autor">Chris S.</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Underground</span>
-										<span class="autor">Jack J.</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">Rain</span>
-										<span class="autor">Jack J.</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-
-							<!-- track -->
-							<div class="col-xs-6 col-sm-3">
-								<div class="track">
-									<div class="track__cover">
-										<img src="img/covers/cover.jpg" alt="">
-									</div>
-
-									<button class="track__play-btn">
-										<i class="glyphicon glyphicon-play"></i>
-										<svg class="svg-circle">
-											<circle cx="30" cy="30" r="28"></circle>
-										</svg>
-									</button>
-
-									<a href="#" class="track__link">
-										<span class="title">River</span>
-										<span class="autor">John Doe</span>
-									</a>
-								</div>
-							</div>
-							<!-- end track -->
-						</div>
-					</section>
-					<!-- end new singles -->
-
-					<!-- latest news -->
-					<section class="section">
-						<div class="row">
-							<!-- section title -->
-							<div class="col-xs-12 col-md-3">
-								<div class="section__title section__title--vertical clearfix">
-									<h2>Latest News</h2>
-									<p>Follow our News to stay well informed and keep up with us. We really have so much to share with you!</p>
-									<a class="section__more" href="news-masonry.html">See All</a>
-								</div>
-							</div>
-							<!-- end section title -->
-
-							<div class="col-xs-12 col-md-9">
-								<div class="row row--grid">
-
-									<!-- news -->
-									<div class="col-xs-12 col-sm-6">
-										<article class="news-post">
-											<figure class="news-post__img"><a href="article.html"><img src="img/news/article.jpg" alt=""></a></figure>
-
-											<header class="news-post__header">
-												<h2 class="news-post__title"><a href="article.html">Oxy will perform in Minsk again</a></h2>
-												<div class="news-post__date">March 29, 2017</div>
-											</header>
-
-											<div class="news-post__content">
-												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-											</div>
-										</article>
-									</div>
-									<!-- end news -->
-
-									<!-- news -->
-									<div class="col-xs-12 col-sm-6">
-										<article class="news-post">
-											<figure class="news-post__img"><a href="article.html"><img src="img/news/article.jpg" alt=""></a></figure>
-
-											<header class="news-post__header">
-												<h2 class="news-post__title"><a href="article.html">Who new Artist of our label? Maybe this..</a></h2>
-												<div class="news-post__date">March 29, 2017</div>
-											</header>
-
-											<div class="news-post__content">
-												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-											</div>
-										</article>
-									</div>
-									<!-- end news -->
-
-								</div>
-							</div>
-						</div>
-					</section>
-					<!-- end latest news -->
-
-					<!-- new items -->
-					<section class="section">
-						<div class="row">
-							<!-- section title -->
-							<div class="col-xs-12">
-								<div class="section__title clearfix">
-									<h2>New Items</h2>
-									<a class="section__more" href="store.html">See All</a>
-								</div>
-							</div>
-							<!-- end section title -->
-
-							<div class="col-xs-12">
-								<div class="store-box clearfix">
-									<!-- merch item -->
-									<a href="item.html" class="store-box__item">
-										<figure class="store-box__img">
-											<img src="img/store/item.jpg" alt="">
-										</figure>
-										<div class="store-box__title">Headphones</div>
-										<div class="store-box__model">ZR-991</div>
-										<div class="store-box__price">$199</div>
-									</a>
-									<!-- end merch item -->
-
-									<!-- merch item -->
-									<a href="item.html" class="store-box__item">
-										<figure class="store-box__img">
-											<img src="img/store/item.jpg" alt="">
-										</figure>
-										<div class="store-box__title">Headphones</div>
-										<div class="store-box__model">LF-34</div>
-										<div class="store-box__price">$259</div>
-									</a>
-									<!-- end merch item -->
-
-									<!-- merch item -->
-									<a href="item.html" class="store-box__item">
-										<figure class="store-box__img">
-											<img src="img/store/item.jpg" alt="">
-										</figure>
-										<div class="store-box__title">Headphones</div>
-										<div class="store-box__model">X-Monster 5</div>
-										<div class="store-box__price">$221</div>
-									</a>
-									<!-- end merch item -->
-
-									<!-- merch item -->
-									<a href="item.html" class="store-box__item">
-										<figure class="store-box__img">
-											<img src="img/store/item.jpg" alt="">
-										</figure>
-										<div class="store-box__title">Headphones</div>
-										<div class="store-box__model">DX-9</div>
-										<div class="store-box__price">$149</div>
-									</a>
-									<!-- end merch item -->
-								</div>
-							</div>
-						</div>
-					</section>
-					<!-- end new items -->
-
+					
 			</div>
 		</main>
 	</div>
 </template>
 
 <template id="profile-page">
-		<div>
-    <h2>Create a new sound:</h2>
-    	<button v-on:click="display()"> test noise </button>
-    <div>
+	<div class="container importantcenter" >
 
-    	<button id="sampler" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
-  	<label> delay <input type="text" value="50" class="delay-dial"> </label>
-  	<label> filter <input type="text" value="50" class="filter-dial"> </label>
-  		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
-      name: <input type="text" name="name" v-model="newSynth.name">
+		<!-- <script src="../build/Tone.js"></script> -->
+		<!-- <script src="./toneScripts/draggabilly.js"></script>
+		<script src="./toneScripts/StartAudioContext.js"></script>
+		<script src="./toneScripts/Interface.js"></script>
+		<script src="https://tonejs.github.io/Logo/build/Logo.js"></script>
+		<script src="./toneScripts/Keyboard.js"></script> -->
+
+		<link rel="stylesheet" type="text/css" href="./style/examples.css">
+		<style type="text/css">
+				img {
+					width: 80%;
+					max-width: 700px;
+					margin-left: auto;
+		    		margin-right: auto;
+		    		display: block;
+				}
+				#Keyboard {
+					margin: 3px!important;
+				}
+			</style>
+
+
+  	<h2>Create a new sound:</h2>
+    <div>
+			<!-- <button id="sampler" class="btn btn-primary" v-on:click="sampler()"> sampler </button>
+  		<label> delay <input type="text" value="50" class="delay-dial"> </label>
+  		<label> filter <input type="text" value="50" class="filter-dial"> </label>
+  		<label> pitch <input type="text" value="50" class="pitch-dial"> </label> -->
+      name: <input type="text" name="name" v-model="newSynth.name"> 
     </div>
-
-
     <div>
-      audio file: <input type="file" v-on:change="createSynth($event)">
+  <label> audio file: </label>  <input type="file" v-on:change="createSynth($event)">
     </div>
     <div v-for="synth in synths">
-      <p> {{ synth.name }} </p>
+      <h2> {{ synth.name }} </h2>
       <audio controls>
       	<source v-bind:src="synth.url" type="audio/x-wav"> 
       </audio>
       <router-link class="btn btn-primary" v-bind:to="{path: '/synths/edit/' + synth.id }">edit</router-link>
-       	<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    note &#8964;
-  </button>
+       <div class="dropdown">
+		  <p>Note: {{ synth.note }} </p>
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    note &#8964;
+		  </button>
     	<button type="button" class="dropdown-menu btn btn-secondary" aria-labelledby="dropdownMenuButton" id="dropDownTags">
-    <p class="dropdown-item" id="C4" v-on:click="createTags($event)">C</p>
-    <p class="dropdown-item" v-on:click="createTags($event)" id="D4">D</p>
-    <p class="dropdown-item" v-on:click="createTags($event)" id="E4">E</p>
-    <p class="dropdown-item" v-on:click="createTags($event)" id="F4">F</p>
-  </div>
-  <div id="dropContainer">
-  <div class="inner"></div>
-  </div>
-    </div>
-    <h1> SAMPLER </h1>
-     <div class="keys" id="key-container">
-     	 <div data-key="65" class="key">A</div>
-     	 <div data-key="83" class="key ">S</div>
-       <div data-key="68" class="key ">D</div>
-       <div data-key="70" class="key ">F</div>
-       <div data-key="71" class="key ">G</div>
-       <div data-key="72" class="key ">H</div>
-       <div data-key="74" class="key ">J</div>
-       <div data-key="75" class="key ">K</div>
-       <div data-key="76" class="key ">L</div>
-     </div>
-  </div>
-	</template>
+		    <!-- <p class="dropdown-item" id="C4" v-on:click="AddSample($event)">C</p>
+		    <p class="dropdown-item" v-on:click="AddSample($event)" id="D4">D</p>
+		    <p class="dropdown-item" v-on:click="AddSample($event)" id="E4">E</p>
+		    <p class="dropdown-item" v-on:click="AddSample($event)" id="F4">F</p> -->
+		    <p
+		    	class="dropdown-item"
+		    	v-for="note in Object.values(keyboardKeyNote)"
+		    	v-on:click="AddSample(synth, note)"
+		    	id="note"
+		    >
+		    	{{ note }}
+		    </p>
+  	</div>
+	  <div id="dropContainer">
+	  	<div class="inner" >
+  	
+  		</div>
+  	</div>
+
+	<!-- 	  <ul class="set">
+			  <li class="white b"></li>
+			  <li class="black as"></li>
+			  <li class="white a"></li>
+			  <li class="black gs"></li>
+			  <li class="white g"></li>
+			  <li class="black fs"></li>
+			  <li class="white f"></li>
+			  <li class="white e"></li>
+		  	<li class="black ds"></li>
+			  <li class="white d"></li>
+			  <li class="black cs"></li>
+			  <li class="white c"></li>
+			</ul>
+	 -->
+ 	</div>
+	<h1> SAMPLER </h1>
+		<div class="keys" id="key-container">
+			<div v-for="synth in synths">
+	 	  	<div class="key">{{ synth.note }} <span>
+	 	   	{{ synth.name }} </span>
+	 	   	</div>
+			</div>	
+		</div>
+		<div class="clearroomforfooter">
+			<h1> Melody </h1>
+			<div  v-for="synth in synths">
+				<label v-bind:for="synth.note" v-on:click="addNote($event)" v-bind:id="synth.id">{{synth.note}} </label>
+			</div>
+	  	<span v-on:click="removeNote($event)">notes: {{ checkedNotes }}</span> 
+			<label> bpm <input type="text" value="90" class="beatspm"> </label>
+			<button class="btn btn-primary" v-on:click="melody()"> Play </button>
+		</div>
+	</div>
+</template>
 
 <template id="signup-page">
-	  <div class="container">
+	  <div class="container importantcenter">
 	    <h1>Signup</h1>
 	    <ul>
 	      <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -918,7 +586,7 @@
 </template>
 
 <template id="login-page">
-  <div class="container">
+  <div class="container importantcenter">
     <h1>Login</h1>
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -1140,12 +808,13 @@
 </template>
 
 <template id="edit-synth-page">
-	<div class="container">
+	<div class="container importantcenter">
+
 			 <div>
     <h2>Create a new sound:</h2>
     	<button id="sampler" class="btn btn-primary" v-on:click="playSample()"> play </button>
-    	<button id="recordId" v-on:click="recordButton()"> test </button>
-    	 <audio controls></audio>
+    	<!-- <button id="recordId" v-on:click="recordButton()"> test </button> -->
+    	 <!-- <audio controls></audio> -->
   	<label> delay <input type="text" value="50" class="delay-dial"> </label>
   	<label> filter <input type="text" value="50" class="filter-dial"> </label>
   		<label> pitch <input type="text" value="50" class="pitch-dial"> </label>
@@ -1153,11 +822,13 @@
     <div v-for="synth in synths">
       <h1>{{ synth.name }} </h1>
        Name
-    <input type="text" v-model="synth.name" id="synthNameChange">
-      <audio controls>
-       <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
-       <router-link v-bind:to="{ path: '/profile' }">Back to profile </router-link>
-
+	    <input type="text" v-model="synth.name">
+	    <!-- <canvas id="canvas">
+	    <audio controls>
+	      <source v-bind:src="synth.url" type="audio/x-wav"> 
+	    </audio>
+	    </canvas> -->
+    </div>
        <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     tags &#8964;
@@ -1166,28 +837,29 @@
     <p class="dropdown-item" id="1" v-on:click="createTags($event)">Traffic</p>
     <p class="dropdown-item" v-on:click="createTags($event)" id="2">8-bit</p>
     <p class="dropdown-item" v-on:click="createTags($event)" id="3">Filtered Drums</p>
-    <p class="dropdown-item" v-on:click="createTags($event)" id="4">Outdoors</p>
+    <p class="dropdown-item" v-on:click="createTags($event)" id="4">Piano</p>
   </div>
   <button class="btn btn-primary" v-on:click="submit()">Submit</button>
 </div>
-<div id="dropContainer">
+<div id="dropContainer" @click="removeTags($event)">
   <div class="inner"></div>
  </div>
-</div>
     </div>
 	</div>
 </template>
 
 <template id="show-tag-page">
-	<div class="container">
-		<br><br>
-<br>	<br>
-		<div  v-for="synth in synths">
-      <p> {{ synth.name }} </p>
-      <audio controls>
-       <source v-bind:src="synth.url" type="audio/x-wav">  </audio>
+	<div class="container importantcenter">
+			<h1 class="tagNameCenter"> Samples </h1>
+			<div  v-for="synth in synths">
+			<li class="tracklist__item">
+				<span class="number"></span>
+				<span class="title">   {{ synth.name }}  </span>
+				<span class="time"> <audio controls class="importantright">
+       <source v-bind:src="synth.url" type="audio/x-wav">  </audio></span>
+										</li>	</div>
+<!-- 	<button v-on:click="testing()">testing</button> -->
 	</div>
-	<button v-on:click="testing()">testing</button>
-	</div>
+
 	</div>
 </template>

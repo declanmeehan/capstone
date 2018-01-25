@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   get "/synth_tags" => "synth_tags#index"
   post "/synth_tags" => "synth_tags#create"
-  delete "/synth_tags/:id" => "synth_tags#destroy"
+  delete "/synth_tags" => "synth_tags#destroy"
 
 
 
